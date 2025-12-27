@@ -7,12 +7,10 @@ const Footer = () => {
       <div className="footer-content-wrapper">
         <div className="footer-brand">
           <h2 className="footer-logo">Medico</h2>
-          <h4 className="footer-tagline">Medico – Effortless Healthcare Scheduling</h4>
+          <h4 className="footer-tagline">Your trusted healthcare partner</h4>
           <p className="footer-description">
-            Patients can instantly book appointments with trusted doctors—from
-            routine check-ups to specialist care—in just a few clicks. Our smart
-            reminders keep appointments on track, while real-time updates ensure
-            seamless coordination. Designed for modern healthcare, we save time for
+            Book doctor appointments, order medicines, and manage your health — all in one place.
+             Designed for modern healthcare, we save time for
             both patients and providers.
           </p>
         </div>

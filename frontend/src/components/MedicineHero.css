@@ -1,0 +1,110 @@
+.medicine-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8fbff;
+    /* Very light blue background */
+    padding: 4rem 6rem;
+    border-radius: 0;
+    /* Full width feel or depending on layout */
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.medicine-hero-content {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+}
+
+.medicine-hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    /* Dark text */
+    margin-bottom: 1rem;
+    font-family: var(--font-sans, sans-serif);
+}
+
+.medicine-hero-text {
+    font-size: 1.1rem;
+    color: #757575;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+.medicine-search-bar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 50px;
+    padding: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    max-width: 450px;
+    border: 1px solid #e0e0e0;
+}
+
+.medicine-search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    color: #333;
+}
+
+.medicine-search-btn {
+    background-color: #2563eb;
+    /* Blue button */
+    color: white;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: background-color 0.2s;
+}
+
+.medicine-search-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.medicine-hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+}
+
+.medicine-hero-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    /* Optional: drop shadow for 3D effect pop */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+@media (max-width: 768px) {
+    .medicine-hero {
+        padding: 3rem 2rem;
+        flex-direction: column-reverse;
+        /* Image on top on mobile? or standard column. Design has text left. */
+        text-align: center;
+    }
+
+    .medicine-hero-content {
+        margin: 0 auto;
+    }
+
+    .medicine-search-bar {
+        margin: 0 auto;
+    }
+}
