@@ -1,0 +1,14 @@
+.testimonials-section{padding:4rem 2rem;max-width:1200px;margin:0 auto;text-align:center}
+.testimonials-title{font-size:2.2rem;color:#1a1a1a;margin-bottom:3rem;font-weight:600;text-align:left}
+.testimonials-scroll{display:flex;gap:2rem;overflow-x:auto;padding-bottom:2rem;scrollbar-width:thin}
+.testimonials-scroll::-webkit-scrollbar{height:8px}
+.testimonials-scroll::-webkit-scrollbar-track{background:#f1f1f1;border-radius:4px}
+.testimonials-scroll::-webkit-scrollbar-thumb{background:#ccc;border-radius:4px}
+.testimonials-scroll::-webkit-scrollbar-thumb:hover{background:#bbb}
+.testimonial-card{min-width:350px;background:#fff;border-radius:16px;padding:2rem;text-align:left;display:flex;gap:1.5rem;align-items:flex-start;box-shadow:0 4px 15px rgba(0,0,0,0.05);border:1px solid #f0f0f0}
+.testimonial-avatar{width:60px;height:60px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.testimonial-content{display:flex;flex-direction:column}
+.testimonial-text{color:#333;font-size:.95rem;line-height:1.5;margin-bottom:1rem;font-weight:500}
+.testimonial-user{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.testimonial-name{font-weight:600;color:#1a1a1a;font-size:.9rem;display:block}
+.testimonial-location{color:#757575;font-size:.8rem}

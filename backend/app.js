@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const doctorRoutes = require("./routes/doctorRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
@@ -12,20 +13,7 @@ const app = express();
 
 // CORS configuration (allow localhost dev ports and preflight)
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-    try {
-      const u = new URL(origin);
-      if (u.hostname === "localhost") return callback(null, true);
-    } catch {}
-    const allowList = new Set([
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "http://localhost:5175"
-    ]);
-    if (allowList.has(origin)) return callback(null, true);
-    return callback(new Error("Not allowed by CORS"));
-  },
+  origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175", "http://localhost:5000"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -33,8 +21,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// Handle preflight for all routes (Express 5 RegExp-compatible)
-app.options(/.*/, cors(corsOptions));
+// In Express 5, cors() handles preflight automatically; avoid wildcard options route
 
 app.use(express.json());
 
@@ -50,6 +37,22 @@ app.use("/api/orders", orderRoutes);
 
 app.get("/", (req, res) => {
   res.send("Medico backend is running 🚀");
+});
+
+// DB health endpoint
+app.get("/health", (req, res) => {
+  const states = {
+    0: "disconnected",
+    1: "connected",
+    2: "connecting",
+    3: "disconnecting",
+    99: "uninitialized",
+  };
+  res.json({
+    status: "ok",
+    dbState: mongoose.connection.readyState,
+    dbStateText: states[mongoose.connection.readyState] || "unknown",
+  });
 });
 
 module.exports = app;

@@ -1,11 +1,12 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import { Link, useNavigate } from "react-router-dom";
+import "./Signup.css";
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -20,7 +21,7 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5001/api/auth/login", {
+      const response = await fetch("http://localhost:5001/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,15 +32,11 @@ const Login = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Login failed");
+        throw new Error(data.message || "Registration failed");
       }
 
-      // Success - Save token
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-
-      // Navigate to main project (Doctors page as default dashboard)
-      navigate("/home");
+      // Success
+      navigate("/login");
     } catch (err) {
       setError(err.message);
     }
@@ -49,9 +46,18 @@ const Login = () => {
     <div className="auth-container">
       <div className="auth-content-wrapper">
         <div className="auth-card">
-          <h2 className="auth-title">Medico Login</h2>
+          <h2 className="auth-title">Medico Signup</h2>
           {error && <div className="auth-error-message">{error}</div>}
           <form className="auth-form" onSubmit={handleSubmit}>
+            <input
+              className="auth-input"
+              type="text"
+              name="name"
+              placeholder="Username"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
             <input
               className="auth-input"
               type="email"
@@ -70,12 +76,16 @@ const Login = () => {
               onChange={handleChange}
               required
             />
-            <button className="auth-button" type="submit">Login</button>
+            <button className="auth-button" type="submit">Sign Up</button>
           </form>
+          <div className="auth-text-link">
+            Already have an account? 
+            <Link to="/login">Login</Link>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
