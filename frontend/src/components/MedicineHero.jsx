@@ -3,7 +3,7 @@ import React from 'react';
 import './MedicineHero.css';
 import medicinesImg from '../assets/med_herosec.png';
 
-const MedicineHero = () => {
+const MedicineHero = ({ onSearch }) => {
   return (
     <div className="medicine-hero">
       <div className="medicine-hero-content">
@@ -18,6 +18,7 @@ const MedicineHero = () => {
             type="text" 
             placeholder="Search for medicine..." 
             className="medicine-search-input"
+            onChange={(e) => onSearch(e.target.value)}
           />
           <button className="medicine-search-btn">
             🔍

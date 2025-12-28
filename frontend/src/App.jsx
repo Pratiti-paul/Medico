@@ -1,30 +1,34 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
-import Appointments from "./pages/Appointments";
 import Medicines from "./pages/Medicines";
+import Cart from "./pages/Cart";
 import Layout from "./components/Layout";
-import About from "./pages/About";
+import { CartProvider } from "./context/CartContext";
 
-function App() {
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  return token ? children : <Navigate to="/login" />;
+};
+
+export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        
-        {/* Protected Routes with Layout */}
-        <Route element={<Layout />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/medicines" element={<Medicines />} />
-          <Route path="/about" element={<About />} />
-        </Route>
-      </Routes>
+      <CartProvider>
+        <Routes>
+          <Route path="/" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          
+          {/* Protected Routes */}
+          <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/medicines" element={<Medicines />} />
+            <Route path="/cart" element={<Cart />} />
+          </Route>
+        </Routes>
+      </CartProvider>
     </BrowserRouter>
   );
 }
-
-export default App;

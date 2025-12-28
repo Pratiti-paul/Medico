@@ -7,7 +7,8 @@ const medicineSchema = new mongoose.Schema(
       required: true
     },
     category: {
-      type: String
+      type: String,
+      required: true
     },
     price: {
       type: Number,
@@ -16,11 +17,14 @@ const medicineSchema = new mongoose.Schema(
     stock: {
       type: Number,
       required: true
+    },
+    image: {
+      type: String, 
+      required: true
     }
   },
-  {
-    timestamps: true
-  }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Medicine", medicineSchema);
+

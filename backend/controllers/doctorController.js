@@ -1,32 +1,41 @@
 const Doctor = require("../models/Doctor");
 
-// GET all doctors
+// GET all doctors with optional filters and sorting
 exports.getAllDoctors = async (req, res) => {
   try {
-    let doctors = await Doctor.find();
+    const {
+      q, // name search
+      specialization,
+      available, // 'true' | 'false'
+      sort = "recent", // recent | rating_desc | experience_desc | fee_asc | fee_desc
+      limit: limitStr
+    } = req.query;
 
-    // Ensure at least 8 sample doctors exist (seed or top-up)
-    const samplePool = [
-      { name: "Dr. Asha Mehra", specialization: "Cardiologist", experience: 12, consultationFee: 800, availableSlots: ["10:00", "11:30", "16:00"] },
-      { name: "Dr. Rohit Sen", specialization: "Dermatologist", experience: 8, consultationFee: 600, availableSlots: ["09:30", "14:00", "18:30"] },
-      { name: "Dr. Priya Nair", specialization: "Pediatrician", experience: 10, consultationFee: 700, availableSlots: ["10:15", "12:00", "17:00"] },
-      { name: "Dr. Arjun Kapoor", specialization: "Orthopedic", experience: 9, consultationFee: 750, availableSlots: ["11:00", "15:30", "19:00"] },
-      { name: "Dr. Neha Sharma", specialization: "Gynecologist", experience: 11, consultationFee: 850, availableSlots: ["09:00", "13:30", "18:00"] },
-      { name: "Dr. Sameer Khan", specialization: "Neurologist", experience: 13, consultationFee: 900, availableSlots: ["10:45", "16:30"] },
-      { name: "Dr. Kavita Rao", specialization: "Ophthalmologist", experience: 7, consultationFee: 650, availableSlots: ["09:45", "12:30", "17:15"] },
-      { name: "Dr. Vivek Gupta", specialization: "ENT Specialist", experience: 10, consultationFee: 700, availableSlots: ["10:30", "15:00", "18:45"] }
-    ];
+    const limit = Math.min(parseInt(limitStr || "10", 10) || 10, 50);
 
-    if (!doctors || doctors.length < 8) {
-      const existingNames = new Set((doctors || []).map(d => d.name));
-      const needed = 8 - (doctors ? doctors.length : 0);
-      const toInsert = samplePool.filter(s => !existingNames.has(s.name)).slice(0, Math.max(0, needed));
-      if (toInsert.length) {
-        await Doctor.insertMany(toInsert);
-        doctors = await Doctor.find();
-      }
+    // Build filter
+    const filter = {};
+    if (q) {
+      filter.name = { $regex: q, $options: "i" };
+    }
+    if (specialization && specialization !== "All") {
+      filter.specialization = specialization;
+    }
+    if (available === "true" || available === "false") {
+      filter.available = available === "true";
     }
 
+    // Build sort option
+    const sortMap = {
+      recent: { createdAt: -1 },
+      rating_desc: { rating: -1 },
+      experience_desc: { experience: -1 },
+      fee_asc: { consultationFee: 1 },
+      fee_desc: { consultationFee: -1 }
+    };
+    const sortOption = sortMap[sort] || sortMap.recent;
+
+    const doctors = await Doctor.find(filter).sort(sortOption).limit(limit);
     res.json(doctors);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import API from "../services/api";
 import doc1 from "../assets/doc1.png";
 import doc2 from "../assets/doc2.png";
 import doc3 from "../assets/doc3.png";
@@ -14,9 +15,10 @@ const TopDoctors = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await fetch("http://localhost:5001/api/doctors");
-        const data = await response.json();
-        setDoctors(data.slice(0, 10));
+        const { data } = await API.get("/doctors", {
+          params: { limit: 8, sort: "rating_desc" }
+        });
+        setDoctors(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Error fetching doctors:", error);
       } finally {

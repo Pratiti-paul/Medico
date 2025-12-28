@@ -1,10 +1,12 @@
 
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { useCart } from "../context/CartContext";
 import "./Navbar.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const { cartCount } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const btnRef = useRef(null);
@@ -44,7 +46,9 @@ export default function Navbar() {
       </div>
       <div className="navbar-user">
         <div className="navbar-actions">
-          <Link to="/orders" className="cart-btn" aria-label="Cart">🛒 Cart</Link>
+          <Link to="/cart" className="cart-btn" aria-label="Cart">
+             🛒 <span className="cart-badge">{cartCount > 0 ? cartCount : ''}</span>
+          </Link>
           <div className="account-wrap">
             <button
               ref={btnRef}
