@@ -39,7 +39,6 @@ app.get("/", (req, res) => {
   res.send("Medico backend is running 🚀");
 });
 
-// DB health endpoint
 app.get("/health", (req, res) => {
   const states = {
     0: "disconnected",

@@ -18,7 +18,7 @@ const TopDoctors = () => {
         const { data } = await API.get("/doctors", {
           params: { limit: 8, sort: "rating_desc" }
         });
-        setDoctors(Array.isArray(data) ? data : []);
+        setDoctors(Array.isArray(data.doctors) ? data.doctors : data);
       } catch (error) {
         console.error("Error fetching doctors:", error);
       } finally {
@@ -42,13 +42,15 @@ const TopDoctors = () => {
             <div className="td-image-container">
               <img
                 className="td-image"
-                src={doctor.image ? doctor.image : placeholders[index % placeholders.length]}
+                src={doctor.image || placeholders[index % placeholders.length]}
                 alt={doctor.name}
-                onError={(e) => { e.target.src = placeholders[index % placeholders.length]; }}
+                onError={(e) => { e.currentTarget.src = placeholders[index % placeholders.length]; }}
               />
             </div>
             <div className="td-info">
-              <div className="td-status">Available</div>
+              <div className={`td-status ${doctor.available ? "on" : "off"}`}>
+                {doctor.available ? "Available" : "Not Available"}
+              </div>
               <h3 className="td-name">{doctor.name}</h3>
               <p className="td-specialty">{doctor.specialization}</p>
             </div>
