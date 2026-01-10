@@ -1,15 +1,21 @@
+import React from 'react';
+import AboutHeader from '../components/AboutHeader';
+import MissionSection from '../components/MissionSection';
+import OfferingsSection from '../components/OfferingsSection';
+import VisionSection from '../components/VisionSection';
+import Feedback from '../components/Feedback';
+import './About.css';
 
-export default function About() {
+const About = () => {
   return (
-    <div style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
-      <h1 style={{ color: "#0070f3" }}>About Medico</h1>
-      <p style={{ lineHeight: "1.6", color: "#4a5568", marginTop: "1rem" }}>
-        Medico is your trusted healthcare companion. We provide seamless access to doctors, 
-        medicines, and consultations, all in one professional platform.
-      </p>
-      <p style={{ lineHeight: "1.6", color: "#4a5568", marginTop: "1rem" }}>
-        Our mission is to make healthcare accessible, efficient, and reliable for everyone.
-      </p>
+    <div className="about-page">
+      <AboutHeader />
+      <MissionSection />
+      <OfferingsSection />
+      <VisionSection />
+      <Feedback />
     </div>
   );
-}
+};
+
+export default About;

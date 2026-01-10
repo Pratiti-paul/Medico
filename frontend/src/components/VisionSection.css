@@ -1,0 +1,19 @@
+/* VisionSection.css */
+.vision-section {
+    padding: 60px 20px 80px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.vision-section h2 {
+    font-size: 28px;
+    color: #1a202c;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.vision-section p {
+    color: #4a5568;
+    line-height: 1.6;
+    max-width: 800px;
+}

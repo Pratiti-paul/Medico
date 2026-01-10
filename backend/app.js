@@ -6,6 +6,7 @@ const doctorRoutes = require("./routes/doctorRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
 const medicineRoutes = require("./routes/medicineRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const feedbackRoutes = require("./routes/feedbackRoutes");
 
 
 
@@ -31,6 +32,7 @@ app.use("/api/doctors", doctorRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/medicines", medicineRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/feedback", feedbackRoutes);
 
 
 

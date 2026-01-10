@@ -1,0 +1,25 @@
+/* MissionSection.css */
+.mission-section {
+    background-color: #f8faff;
+    /* Light blueish tint */
+    padding: 60px 20px;
+    text-align: left;
+}
+
+.mission-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.mission-section h2 {
+    font-size: 28px;
+    color: #1a202c;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.mission-section p {
+    color: #4a5568;
+    line-height: 1.6;
+    max-width: 800px;
+}
