@@ -46,14 +46,21 @@
 .speciality-circle {
     width: 80px;
     height: 80px;
-    background-color: #e2e8f0;
-    /* Default generic placeholder color */
+    background-color: #f0f9ff;
     border-radius: 50%;
     margin-bottom: 12px;
     transition: all 0.3s ease;
-    /* Visual flair for the placeholder circle since we don't have icons yet */
-    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
     border: 1px solid #bae6fd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.speciality-icon {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
 }
 
 .speciality-item.active .speciality-circle {

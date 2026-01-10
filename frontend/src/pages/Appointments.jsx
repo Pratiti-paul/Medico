@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Appointments.css";
 
+import generalIcon from "../assets/Physician Medical Assistance.png";
+import gynecologistIcon from "../assets/gynecologist.png";
+import dermatologistIcon from "../assets/Dermatologist icon.png";
+import pediatricianIcon from "../assets/Pediatrician Icon.png";
+import neurologistIcon from "../assets/Neurologist Icon.png";
+import gastroIcon from "../assets/Gastroenterologists Icon.png";
+
 const Appointments = () => {
   const [doctors, setDoctors] = useState([]);
   const [filteredDoctors, setFilteredDoctors] = useState([]);
@@ -9,12 +16,12 @@ const Appointments = () => {
   const [loading, setLoading] = useState(true);
 
   const specialities = [
-    "General physician",
-    "Gynecologist",
-    "Dermatologist",
-    "Pediatricians",
-    "Neurologist",
-    "Gastroenterologist",
+    { name: "General physician", icon: generalIcon },
+    { name: "Gynecologist", icon: gynecologistIcon },
+    { name: "Dermatologist", icon: dermatologistIcon },
+    { name: "Pediatricians", icon: pediatricianIcon },
+    { name: "Neurologist", icon: neurologistIcon },
+    { name: "Gastroenterologist", icon: gastroIcon },
   ];
 
   useEffect(() => {
@@ -59,17 +66,18 @@ const Appointments = () => {
         </p>
 
         <div className="speciality-menu">
-          {specialities.map((speciality) => (
+          {specialities.map((item) => (
             <div
-              key={speciality}
+              key={item.name}
               className={`speciality-item ${
-                selectedSpeciality === speciality ? "active" : ""
+                selectedSpeciality === item.name ? "active" : ""
               }`}
-              onClick={() => handleFilter(speciality)}
+              onClick={() => handleFilter(item.name)}
             >
               <div className="speciality-circle">
+                 <img src={item.icon} alt={item.name} className="speciality-icon" />
               </div>
-              <span className="speciality-label">{speciality}</span>
+              <span className="speciality-label">{item.name}</span>
             </div>
           ))}
         </div>
