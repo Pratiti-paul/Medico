@@ -1,24 +1,22 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import API from "../services/api";
-import doc1 from "../assets/doc1.png";
-import doc2 from "../assets/doc2.png";
-import doc3 from "../assets/doc3.png";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./TopDoctors.css";
 
 const TopDoctors = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const placeholders = [doc1, doc2, doc3];
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchDoctors = async () => {
+    const fetchTopDoctors = async () => {
       try {
-        const { data } = await API.get("/doctors", {
-          params: { limit: 8, sort: "rating_desc" }
+        const res = await axios.get("http://localhost:5001/api/doctors", {
+          params: {
+            limit: 8
+          }
         });
-        setDoctors(Array.isArray(data.doctors) ? data.doctors : data);
+        setDoctors(res.data);
       } catch (error) {
         console.error("Error fetching doctors:", error);
       } finally {
@@ -26,42 +24,48 @@ const TopDoctors = () => {
       }
     };
 
-    fetchDoctors();
+    fetchTopDoctors();
   }, []);
 
-  if (loading) return <div className="td-section">Loading top doctors...</div>;
+  if (loading) {
+    return <p className="td-loading">Loading top doctors...</p>;
+  }
 
   return (
-    <div className="td-section">
-      <h2 className="td-title">Top Doctors to Book</h2>
-      <p className="td-subtitle">Simply browse through our extensive list of trusted doctors.</p>
+    <section className="top-doctors">
+      <h2 className="td-heading">Top Doctors</h2>
+      <p className="td-subheading">
+        Book appointments with trusted specialists
+      </p>
 
       <div className="td-grid">
-        {doctors.map((doctor, index) => (
+        {doctors.map((doctor) => (
           <div className="td-card" key={doctor._id}>
-            <div className="td-image-container">
-              <img
-                className="td-image"
-                src={doctor.image || placeholders[index % placeholders.length]}
-                alt={doctor.name}
-                onError={(e) => { e.currentTarget.src = placeholders[index % placeholders.length]; }}
-              />
-            </div>
+            <img
+              src={doctor.image}
+              alt={doctor.name}
+              className="td-image"
+            />
+
             <div className="td-info">
-              <div className={`td-status ${doctor.available ? "on" : "off"}`}>
-                {doctor.available ? "Available" : "Not Available"}
-              </div>
               <h3 className="td-name">{doctor.name}</h3>
-              <p className="td-specialty">{doctor.specialization}</p>
+              <p className="td-specialization">{doctor.specialization}</p>
+
+              <span
+                className={`td-status ${
+                  doctor.available ? "available" : "unavailable"
+                }`}
+              >
+                {doctor.available ? "Available" : "Not Available"}
+              </span>
             </div>
           </div>
         ))}
       </div>
-
-      <div className="td-more-wrap">
-        <Link className="td-more" to="/doctors">more</Link>
-      </div>
-    </div>
+      <button onClick={() => navigate("/appointments")} className="td-more-btn">
+        more
+      </button>
+    </section>
   );
 };
 

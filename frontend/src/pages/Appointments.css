@@ -1,0 +1,170 @@
+.doctors-page {
+    padding: 40px 80px;
+    background-color: #ffffff;
+}
+
+.top-filter-section {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.filter-heading {
+    font-size: 32px;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 12px;
+}
+
+.filter-subheading {
+    font-size: 16px;
+    color: #4a5568;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    line-height: 1.5;
+}
+
+.speciality-menu {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.speciality-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    width: 120px;
+    transition: transform 0.2s;
+}
+
+.speciality-item:hover {
+    transform: translateY(-5px);
+}
+
+.speciality-circle {
+    width: 80px;
+    height: 80px;
+    background-color: #e2e8f0;
+    /* Default generic placeholder color */
+    border-radius: 50%;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    /* Visual flair for the placeholder circle since we don't have icons yet */
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    border: 1px solid #bae6fd;
+}
+
+.speciality-item.active .speciality-circle {
+    box-shadow: 0 0 0 4px #bfdbfe;
+    background: linear-gradient(135deg, #bfdbfe 0%, #60a5fa 100%);
+    border-color: #60a5fa;
+}
+
+.speciality-label {
+    font-size: 13px;
+    color: #4a5568;
+    text-align: center;
+    font-weight: 500;
+}
+
+.speciality-item.active .speciality-label {
+    font-weight: 600;
+    color: #2b6cb0;
+}
+
+.doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+/* Card styles reused/enhanced */
+.doc-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    background-color: white;
+}
+
+.doc-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.15);
+}
+
+.doc-image-container {
+    background-color: #f7fafc;
+    width: 100%;
+    height: 240px;
+    /* Specific height for consistency */
+    overflow: hidden;
+    position: relative;
+}
+
+.doc-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    /* Show face properly */
+}
+
+.doc-info {
+    padding: 16px;
+}
+
+.doc-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-dot.available {
+    background-color: #22c55e;
+}
+
+.status-dot.unavailable {
+    background-color: #ef4444;
+}
+
+.status-text {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-text.available {
+    color: #22c55e;
+}
+
+.status-text.unavailable {
+    color: #ef4444;
+}
+
+.doc-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 4px;
+}
+
+.doc-speciality {
+    font-size: 13px;
+    color: #718096;
+}
+
+.loading-text {
+    text-align: center;
+    padding: 60px;
+    font-size: 18px;
+    color: #a0aec0;
+}

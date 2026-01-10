@@ -1,5 +1,7 @@
-import patient1 from "../assets/patient1.png";
-import patient2 from "../assets/patient2.png";
+// import patient1 from "../assets/patient1.png";
+// import patient2 from "../assets/patient2.png";
+const patient1 = "https://via.placeholder.com/50?text=P1";
+const patient2 = "https://via.placeholder.com/50?text=P2";
 import "./Testimonials.css";
 
 const Testimonials = () => {

@@ -11,7 +11,7 @@ exports.getAllDoctors = async (req, res) => {
       limit: limitStr
     } = req.query;
 
-    const limit = Math.min(parseInt(limitStr || "10", 10) || 10, 50);
+    const limit = Math.min(parseInt(limitStr || "1000", 10) || 1000, 1000);
 
     // Build filter
     const filter = {};

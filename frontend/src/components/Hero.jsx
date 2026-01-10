@@ -1,10 +1,11 @@
 
 import React from 'react';
-import heroImg from '../assets/hero_doctors.png';
-import doc1 from '../assets/doc1.png';
-import doc2 from '../assets/doc2.png';
-import doc3 from '../assets/doc3.png';
 import './Hero.css';
+
+const heroImg = "https://via.placeholder.com/600x600?text=Hero+Doctors";
+const doc1 = "https://via.placeholder.com/50?text=D1";
+const doc2 = "https://via.placeholder.com/50?text=D2";
+const doc3 = "https://via.placeholder.com/50?text=D3";
 
 const Hero = () => {
   return (

@@ -1,7 +1,8 @@
 
 import React from 'react';
 import './MedicineHero.css';
-import medicinesImg from '../assets/med_herosec.png';
+// import medicinesImg from '../assets/med_herosec.png';
+const medicinesImg = "https://via.placeholder.com/600x400?text=Medicine+Hero";
 
 const MedicineHero = ({ onSearch }) => {
   return (
