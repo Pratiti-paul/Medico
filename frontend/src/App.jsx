@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Medicines from "./pages/Medicines";
 import Appointments from "./pages/Appointments";
+import DoctorProfile from "./pages/DoctorProfile";
 import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Layout from "./components/Layout";
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/medicines" element={<Medicines />} />
             <Route path="/appointments" element={<Appointments />} />
+            <Route path="/appointments/:docId" element={<DoctorProfile />} />
             <Route path="/about" element={<About />} />
             <Route path="/cart" element={<Cart />} />
           </Route>

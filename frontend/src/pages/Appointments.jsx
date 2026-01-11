@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Appointments.css";
 
@@ -14,6 +15,7 @@ const Appointments = () => {
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [selectedSpeciality, setSelectedSpeciality] = useState("All");
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const specialities = [
     { name: "General physician", icon: generalIcon },
@@ -85,7 +87,11 @@ const Appointments = () => {
 
       <div className="doctors-grid">
         {filteredDoctors.map((doctor) => (
-          <div className="doc-card" key={doctor._id}>
+          <div 
+            className="doc-card" 
+            key={doctor._id}
+            onClick={() => navigate(`/appointments/${doctor._id}`)}
+          >
             <div className="doc-image-container">
               <img
                 src={doctor.image}
