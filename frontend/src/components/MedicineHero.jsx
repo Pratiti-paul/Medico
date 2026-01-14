@@ -1,10 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import './MedicineHero.css';
 // import medicinesImg from '../assets/med_herosec.png';
 const medicinesImg = "https://via.placeholder.com/600x400?text=Medicine+Hero";
 
 const MedicineHero = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <div className="medicine-hero">
       <div className="medicine-hero-content">
@@ -19,9 +21,14 @@ const MedicineHero = ({ onSearch }) => {
             type="text" 
             placeholder="Search for medicine..." 
             className="medicine-search-input"
-            onChange={(e) => onSearch(e.target.value)}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && onSearch(searchTerm)}
           />
-          <button className="medicine-search-btn">
+          <button 
+            className="medicine-search-btn"
+            onClick={() => onSearch(searchTerm)}
+          >
             🔍
           </button>
         </div>
