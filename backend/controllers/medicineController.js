@@ -3,17 +3,18 @@ const Medicine = require("../models/Medicine");
 // GET all medicines with filtering, sorting, and pagination
 exports.getAllMedicines = async (req, res) => {
   try {
-    const { page = 1, limit = 8, search = "", sort = "", category = "All" } = req.query;
+    const { page = 1, limit = 8, search = "", sort = "", category = "ALL" } = req.query;
 
     const query = {
       name: { $regex: search, $options: "i" }, // Case-insensitive search
     };
 
-    if (category !== "All") {
+    if (category !== "ALL") {
       query.category = category;
     }
 
-    let sortOptions = {};
+    let sortOptions = {}; // Default no sort (insertion order) or _id
+
     if (sort === "price_low") sortOptions = { price: 1 };
     else if (sort === "price_high") sortOptions = { price: -1 };
     else if (sort === "name_asc") sortOptions = { name: 1 };
@@ -21,10 +22,13 @@ exports.getAllMedicines = async (req, res) => {
 
     const medicines = await Medicine.find(query)
       .sort(sortOptions)
-      .limit(limit * 1)
-      .skip((page - 1) * limit);
+      .collation({ locale: "en", strength: 2 }) // Case-insensitive sorting
+      .limit(Number(limit))
+      .skip((Number(page) - 1) * Number(limit));
 
-    const count = await Medicine.countDocuments(query);
+
+
+    const count = await Medicine.countDocuments(query).collation({ locale: "en", strength: 2 });
 
     res.json({
       medicines,

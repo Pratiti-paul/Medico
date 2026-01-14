@@ -13,7 +13,7 @@ export default function Medicines() {
   // Filter States
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("name_asc");
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState("ALL");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalMedicines, setTotalMedicines] = useState(0);
@@ -21,12 +21,11 @@ export default function Medicines() {
   const PER_PAGE = 8;
   
    const categories = [
-    { label: "All", value: "All" },
-    { label: "Fever & Pain", value: "Analgesic" }, // Mapping to Analgesic
-    { label: "Diabetes", value: "Diabetes" },
-    { label: "Antibiotics", value: "Antibiotics" },
-    { label: "Supplements", value: "Supplement" },
-    { label: "Stomach Care", value: "Antacid" }
+    { label: "ALL", value: "ALL" },
+    { label: "FEVER & COLD", value: "FEVER & COLD" },
+    { label: "SUPPLEMENTS", value: "SUPPLEMENTS" },
+    { label: "ANTIBIOTICS", value: "ANTIBIOTICS" },
+    { label: "OTHERS", value: "OTHERS" }
   ];
 
   useEffect(() => {
