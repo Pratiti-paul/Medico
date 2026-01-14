@@ -1,20 +1,43 @@
 /* AboutHeader.css */
 .about-header {
     text-align: center;
-    padding: 60px 20px 40px;
-    max-width: 800px;
+    padding: 80px 20px 60px;
+    max-width: 900px;
     margin: 0 auto;
+    position: relative;
+    font-family: Georgia, serif;
 }
 
 .about-header h1 {
-    font-size: 36px;
-    color: #1a202c;
-    margin-bottom: 20px;
+    font-size: 48px;
+    color: #2c3e50;
+    margin-bottom: 24px;
     font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .about-header p {
-    font-size: 16px;
-    color: #4a5568;
-    line-height: 1.6;
+    font-size: 1.25rem;
+    color: #4b5563;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 400;
 }
