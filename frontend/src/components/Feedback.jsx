@@ -24,7 +24,8 @@ const Feedback = () => {
       setStatus("Thank you for your feedback ❤️");
       setForm({ name: "", email: "", message: "" });
     } catch (error) {
-      setStatus("Something went wrong. Please try again.");
+      console.error(error);
+      setStatus(error.response?.data?.message || "Something went wrong. Please try again.");
     }
   };
 

@@ -1,35 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./DoctorProfile.css";
-// import verifiedIcon from "../assets/verified_icon.svg"; 
-// import infoIcon from "../assets/info_icon.svg"; 
 
 const DoctorProfile = () => {
     const { docId } = useParams();
+    const navigate = useNavigate();
     const [doctor, setDoctor] = useState(null);
     const [loading, setLoading] = useState(true);
     const [docSlots, setDocSlots] = useState([]);
     const [slotIndex, setSlotIndex] = useState(0);
     const [slotTime, setSlotTime] = useState('');
+    const [bookedSlots, setBookedSlots] = useState([]);
 
     const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
     useEffect(() => {
-        const fetchDoctor = async () => {
+        const fetchDoctorAndSlots = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/api/doctors/${docId}`);
-                setDoctor(res.data);
+                const [docRes, slotsRes] = await Promise.all([
+                    axios.get(`http://localhost:5001/api/doctors/${docId}`),
+                    axios.get(`http://localhost:5001/api/appointments/doctor/${docId}`)
+                ]);
+                
+                setDoctor(docRes.data);
+                setBookedSlots(slotsRes.data);
             } catch (error) {
-                console.error("Error fetching doctor:", error);
+                console.error("Error fetching data:", error);
             } finally {
                 setLoading(false);
             }
         };
-        fetchDoctor();
-        
-        // Generate booking slots (placeholder logic)
-        // We'll generate next 7 days
+        fetchDoctorAndSlots();
+    }, [docId]);
+
+    // Generate slots
+    useEffect(() => {
+        if (!doctor) return;
+
         let today = new Date();
         let allSlots = [];
         
@@ -39,7 +47,7 @@ const DoctorProfile = () => {
             
             let endTime = new Date();
             endTime.setDate(today.getDate() + i);
-            endTime.setHours(21, 0, 0, 0); // 9 PM
+            endTime.setHours(21, 0, 0, 0); 
             
             if (today.getDate() === currentDate.getDate()) {
                 currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10);
@@ -52,6 +60,8 @@ const DoctorProfile = () => {
             let timeSlots = [];
             while(currentDate < endTime) {
                 let formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                // Use a standard date format for comparison (e.g., DD_MM_YYYY or simplified string)
+                // For this implementation, we'll use `toDateString()` which returns "Wed Jan 15 2026"
                 timeSlots.push({
                     datetime: new Date(currentDate),
                     time: formattedTime
@@ -62,13 +72,64 @@ const DoctorProfile = () => {
             allSlots.push(timeSlots);
         }
         setDocSlots(allSlots);
+    }, [doctor]);
+
+    const bookAppointment = async () => {
+        if (!slotTime) {
+            alert("Please select a time slot");
+            return;
+        }
+
+        const date = docSlots[slotIndex][0].datetime.getDate();
+        const month = docSlots[slotIndex][0].datetime.getMonth() + 1;
+        const year = docSlots[slotIndex][0].datetime.getFullYear();
         
-    }, [docId]);
+        const slotDate = `${date}_${month}_${year}`; 
+
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Please login to book appointment");
+                navigate('/login');
+                return;
+            }
+
+            const res = await axios.post(
+                "http://localhost:5001/api/appointments",
+                {
+                    doctorId: docId,
+                    date: slotDate,
+                    time: slotTime
+                },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+
+            if (res.data.appointment) {
+                alert("Appointment booked successfully!");
+                // Refresh booked slots
+                const updatedSlots = await axios.get(`http://localhost:5001/api/appointments/doctor/${docId}`);
+                setBookedSlots(updatedSlots.data);
+                setSlotTime(''); // Reset selection
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert(error.response?.data?.message || "Booking failed");
+        }
+    };
+
+    const isSlotBooked = (dateObj, time) => {
+        const date = dateObj.getDate();
+        const month = dateObj.getMonth() + 1;
+        const year = dateObj.getFullYear();
+        const slotDate = `${date}_${month}_${year}`;
+        
+        return bookedSlots.some(slot => slot.date === slotDate && slot.time === time);
+    };
 
     if (loading) return <div className="loading-text">Loading...</div>;
     if (!doctor) return <div className="loading-text">Doctor not found</div>;
 
-    // Use placeholder verified icon for now
     const verifiedIconObj = "https://via.placeholder.com/20/0000FF/808080?text=V"
 
     return (
@@ -94,7 +155,7 @@ const DoctorProfile = () => {
                         <h3>About <span className="info-icon">ℹ️</span></h3>
                         <p className="about-text">
                             {doctor.name} is a dedicated {doctor.specialization.toLowerCase()} with over {doctor.experience} years 
-                            of professional experience. Committed to providing comprehensive medical care, {doctor.name.split(' ')[0]} focuses 
+                            of professional experience. Committed to providing comprehensive professional medical care, {doctor.name.split(' ')[0]} focuses 
                             on preventative strategies and accurate diagnoses to ensure the best patient outcomes.
                         </p>
                     </div>
@@ -123,24 +184,26 @@ const DoctorProfile = () => {
                 </div>
                 
                 <div className="slots-times">
-                    {docSlots.length > 0 && docSlots[slotIndex].map((item, index) => (
-                        <p 
-                            className={`time-slot ${item.time === slotTime ? 'active' : ''}`} 
-                            key={index}
-                            onClick={() => setSlotTime(item.time)}
-                        >
-                            {item.time.toLowerCase()}
-                        </p>
-                    ))}
+                    {docSlots.length > 0 && docSlots[slotIndex].map((item, index) => {
+                        const booked = isSlotBooked(item.datetime, item.time);
+                        return (
+                            <p 
+                                className={`time-slot ${item.time === slotTime ? 'active' : ''} ${booked ? 'booked' : ''}`} 
+                                key={index}
+                                onClick={() => !booked && setSlotTime(item.time)}
+                                style={booked ? { backgroundColor: '#e0e0e0', color: '#a0a0a0', cursor: 'not-allowed', borderColor: '#d0d0d0' } : {}}
+                                title={booked ? "Slot already booked" : ""}
+                            >
+                                {item.time.toLowerCase()}
+                            </p>
+                        )
+                    })}
                 </div>
                 
-                <button className="book-appointment-btn">
+                <button className="book-appointment-btn" onClick={bookAppointment}>
                     Book an appointment
                 </button>
             </div>
-            
-             {/* Related Doctors (Optional/Placeholder) */}
-             {/* Could reuse TopDoctors component or filtered list here */}
         </div>
     );
 };

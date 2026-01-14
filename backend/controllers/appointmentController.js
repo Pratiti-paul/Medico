@@ -1,9 +1,21 @@
 const Appointment = require("../models/Appointment");
 
 // BOOK appointment
+// BOOK appointment
 exports.bookAppointment = async (req, res) => {
   try {
     const { doctorId, date, time } = req.body;
+
+    // Check availability
+    const existingAppointment = await Appointment.findOne({
+      doctor: doctorId,
+      date,
+      time
+    });
+
+    if (existingAppointment) {
+      return res.status(400).json({ message: "Slot already booked" });
+    }
 
     const appointment = await Appointment.create({
       patient: req.user._id,
@@ -18,6 +30,17 @@ exports.bookAppointment = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+// GET doctor's booked slots
+exports.getDoctorAppointments = async (req, res) => {
+  try {
+    const { docId } = req.params;
+    const appointments = await Appointment.find({ doctor: docId }).select("date time -_id");
+    res.json(appointments);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
   }
 };
 
