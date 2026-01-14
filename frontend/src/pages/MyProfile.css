@@ -1,0 +1,92 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f8f9fa;
+    /* Light background behind card */
+}
+
+.profile-card {
+    background: white;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    /* Soft shadow */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #2563eb;
+    /* Blue primary */
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0.5rem 0 0.2rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.profile-email {
+    color: #64748b;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.profile-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #f1f5f9;
+    margin: 1.5rem 0;
+}
+
+.profile-meta {
+    margin-bottom: 2rem;
+}
+
+.meta-label {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.2rem;
+}
+
+.meta-value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.logout-btn {
+    background-color: #ef4444;
+    /* Red color */
+    color: white;
+    border: none;
+    padding: 0.8rem 2.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.logout-btn:hover {
+    background-color: #dc2626;
+}

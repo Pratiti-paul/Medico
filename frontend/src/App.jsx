@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Medicines from "./pages/Medicines";
 import Appointments from "./pages/Appointments";
 import DoctorProfile from "./pages/DoctorProfile";
+import MyProfile from "./pages/MyProfile";
 import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Layout from "./components/Layout";
@@ -31,6 +32,7 @@ export default function App() {
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/appointments/:docId" element={<DoctorProfile />} />
             <Route path="/about" element={<About />} />
+            <Route path="/profile" element={<MyProfile />} />
             <Route path="/cart" element={<Cart />} />
           </Route>
         </Routes>

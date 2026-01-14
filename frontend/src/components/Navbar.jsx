@@ -50,17 +50,20 @@ export default function Navbar() {
              🛒 <span className="cart-badge">{cartCount > 0 ? cartCount : ''}</span>
           </Link>
           <div className="account-wrap">
-            <button
+            <div 
+              className="account-trigger"
               ref={btnRef}
-              className="account-btn"
               onClick={() => setMenuOpen((v) => !v)}
-              aria-haspopup="true"
-              aria-expanded={menuOpen}
             >
-              Account ▾
-            </button>
+              <img 
+                src="https://via.placeholder.com/40" 
+                alt="Account" 
+                className="account-icon"
+              />
+            </div>
             {menuOpen && (
               <div ref={menuRef} className="account-menu" role="menu">
+                <button className="menu-item" onClick={() => navigate('/profile')}>Profile</button>
                 <button className="menu-item" onClick={handleLogout}>Logout</button>
               </div>
             )}

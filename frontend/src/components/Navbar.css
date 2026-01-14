@@ -16,13 +16,12 @@
   color: #2563eb;
   margin: 0;
   font-weight: 700;
-  /* font-family: Georgia;b */
 }
 
 .navbar-links {
   display: flex;
   gap: 2rem;
-  
+
 }
 
 .navbar-links a {
@@ -85,27 +84,34 @@
 /* Account Dropdown */
 .account-wrap {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.account-btn {
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 0.95rem;
+.account-trigger {
   cursor: pointer;
-  transition: background 0.2s;
+  display: flex;
+  align-items: center;
 }
 
-.account-btn:hover {
-  background-color: #1d4ed8;
+.account-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #2563eb;
+  padding: 2px;
+  background-color: white;
+  transition: transform 0.2s;
+}
+
+.account-trigger:hover .account-icon {
+  transform: scale(1.05);
 }
 
 .account-menu {
   position: absolute;
-  top: 120%;
+  top: 140%;
   right: 0;
   background: white;
   border: 1px solid #e0e0e0;
