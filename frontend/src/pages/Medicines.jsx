@@ -5,7 +5,7 @@ import { useCart } from "../context/CartContext";
 import "./Medicines.css";
 
 export default function Medicines() {
-  const { addToCart } = useCart();
+  const { addToCart, cartItems, updateQuantity } = useCart();
   const [medicines, setMedicines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -152,7 +152,39 @@ export default function Medicines() {
                  <h4 className="medicine-name">{med.name}</h4>
                  <div className="medicine-footer">
                     <span className="medicine-price">₹{med.price}</span>
-                    <button className="add-btn" onClick={() => addToCart(med)}>Add to Cart</button>
+                    {(() => {
+                      const cartItem = cartItems.find(item => item._id === med._id);
+                      const qty = cartItem ? cartItem.quantity : 0;
+                      
+                      if (qty > 0) {
+                        return (
+                          <div className="qty-controls-mini">
+                            <button 
+                              className="qty-btn-mini" 
+                              onClick={() => updateQuantity(med._id, -1)}
+                            >
+                              −
+                            </button>
+                            <span className="qty-val-mini">{qty}</span>
+                            <button 
+                              className="qty-btn-mini" 
+                              onClick={() => updateQuantity(med._id, 1)}
+                            >
+                              +
+                            </button>
+                          </div>
+                        );
+                      }
+
+                      return (
+                         <button 
+                           className="add-btn" 
+                           onClick={() => addToCart(med)}
+                         >
+                           Add to Cart
+                         </button>
+                      );
+                    })()}
                  </div>
               </div>
             </div>

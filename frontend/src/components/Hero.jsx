@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Hero.css';
 
 const heroImg = "https://via.placeholder.com/600x600?text=Hero+Doctors";
@@ -8,6 +9,7 @@ const doc2 = "https://via.placeholder.com/50?text=D2";
 const doc3 = "https://via.placeholder.com/50?text=D3";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <div className="hero-section">
       <div className="hero-content">
@@ -25,7 +27,10 @@ const Hero = () => {
           </p>
         </div>
 
-        <button className="hero-button">
+        <button 
+          className="hero-button"
+          onClick={() => navigate('/appointments')}
+        >
           Book appointment <span style={{ fontSize: '1.2rem' }}>→</span>
         </button>
       </div>

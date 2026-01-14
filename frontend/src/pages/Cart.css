@@ -254,8 +254,28 @@
         flex-direction: column;
     }
 
+
     .order-summary {
         width: 100%;
         position: static;
     }
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    /* Red color */
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.remove-btn:hover {
+    background-color: #fef2f2;
+    text-decoration: underline;
 }
