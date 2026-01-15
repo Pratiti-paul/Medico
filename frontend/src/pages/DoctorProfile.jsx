@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
+import verified from "../assets/verified.png";
 import "./DoctorProfile.css";
 
 const DoctorProfile = () => {
@@ -76,7 +78,7 @@ const DoctorProfile = () => {
 
     const bookAppointment = async () => {
         if (!slotTime) {
-            alert("Please select a time slot");
+            toast.warning("Please select a time slot");
             return;
         }
 
@@ -89,7 +91,7 @@ const DoctorProfile = () => {
         try {
             const token = localStorage.getItem("token");
             if (!token) {
-                alert("Please login to book appointment");
+                toast.error("Please login to book appointment");
                 navigate('/login');
                 return;
             }
@@ -105,7 +107,7 @@ const DoctorProfile = () => {
             );
 
             if (res.data.appointment) {
-                alert("Appointment booked successfully!");
+                toast.success("Appointment booked successfully!");
                 // Refresh booked slots
                 const updatedSlots = await axios.get(`http://localhost:5001/api/appointments/doctor/${docId}`);
                 setBookedSlots(updatedSlots.data);
@@ -114,7 +116,7 @@ const DoctorProfile = () => {
 
         } catch (error) {
             console.error(error);
-            alert(error.response?.data?.message || "Booking failed");
+            toast.error(error.response?.data?.message || "Booking failed");
         }
     };
 
@@ -130,7 +132,7 @@ const DoctorProfile = () => {
     if (loading) return <div className="loading-text">Loading...</div>;
     if (!doctor) return <div className="loading-text">Doctor not found</div>;
 
-    const verifiedIconObj = "https://via.placeholder.com/20/0000FF/808080?text=V"
+    const verifiedIconObj = verified;
 
     return (
         <div className="doctor-profile-container">
@@ -149,6 +151,9 @@ const DoctorProfile = () => {
                     <div className="detail-qualification">
                         <span>MBBS - {doctor.specialization}</span>
                         <span className="experience-pill">{doctor.experience} Years</span>
+                        <span className={`availability-status ${doctor.available ? 'status-online' : 'status-offline'}`}>
+                            {doctor.available ? 'Available' : 'Currently Unavailable'}
+                        </span>
                     </div>
                     
                     <div className="detail-about">
@@ -166,44 +171,50 @@ const DoctorProfile = () => {
                 </div>
             </div>
             
-            {/* Booking Slots Section */}
-            <div className="booking-slots-section">
-                <h3>Booking slots</h3>
-                
-                <div className="slots-days">
-                    {docSlots.length > 0 && docSlots.map((item, index) => (
-                        <div 
-                            key={index} 
-                            className={`day-slot ${slotIndex === index ? 'active' : ''}`}
-                            onClick={() => setSlotIndex(index)}
-                        >
-                            <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
-                            <p>{item[0] && item[0].datetime.getDate()}</p>
-                        </div>
-                    ))}
-                </div>
-                
-                <div className="slots-times">
-                    {docSlots.length > 0 && docSlots[slotIndex].map((item, index) => {
-                        const booked = isSlotBooked(item.datetime, item.time);
-                        return (
-                            <p 
-                                className={`time-slot ${item.time === slotTime ? 'active' : ''} ${booked ? 'booked' : ''}`} 
-                                key={index}
-                                onClick={() => !booked && setSlotTime(item.time)}
-                                style={booked ? { backgroundColor: '#e0e0e0', color: '#a0a0a0', cursor: 'not-allowed', borderColor: '#d0d0d0' } : {}}
-                                title={booked ? "Slot already booked" : ""}
+            {/* Booking Slots Section - Only show if available */}
+            {doctor.available ? (
+                <div className="booking-slots-section">
+                    <h3>Booking slots</h3>
+                    
+                    <div className="slots-days">
+                        {docSlots.length > 0 && docSlots.map((item, index) => (
+                            <div 
+                                key={index} 
+                                className={`day-slot ${slotIndex === index ? 'active' : ''}`}
+                                onClick={() => setSlotIndex(index)}
                             >
-                                {item.time.toLowerCase()}
-                            </p>
-                        )
-                    })}
+                                <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
+                                <p>{item[0] && item[0].datetime.getDate()}</p>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    <div className="slots-times">
+                        {docSlots.length > 0 && docSlots[slotIndex].map((item, index) => {
+                            const booked = isSlotBooked(item.datetime, item.time);
+                            return (
+                                <p 
+                                    className={`time-slot ${item.time === slotTime ? 'active' : ''} ${booked ? 'booked' : ''}`} 
+                                    key={index}
+                                    onClick={() => !booked && setSlotTime(item.time)}
+                                    style={booked ? { backgroundColor: '#e0e0e0', color: '#a0a0a0', cursor: 'not-allowed', borderColor: '#d0d0d0' } : {}}
+                                    title={booked ? "Slot already booked" : ""}
+                                >
+                                    {item.time.toLowerCase()}
+                                </p>
+                            )
+                        })}
+                    </div>
+                    
+                    <button className="book-appointment-btn" onClick={bookAppointment}>
+                        Book an appointment
+                    </button>
                 </div>
-                
-                <button className="book-appointment-btn" onClick={bookAppointment}>
-                    Book an appointment
-                </button>
-            </div>
+            ) : (
+                <div className="unavailable-notice">
+                    <p>This doctor is currently not accepting new appointments. Please check back later or browse other available doctors.</p>
+                </div>
+            )}
         </div>
     );
 };

@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import "./Login.css";
 
 const Login = () => {
@@ -39,9 +40,11 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(data.user));
 
       // Navigate to main project (Doctors page as default dashboard)
+      toast.success("Logged in successfully!");
       navigate("/home");
     } catch (err) {
       setError(err.message);
+      toast.error(err.message);
     }
   };
 

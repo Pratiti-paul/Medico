@@ -208,6 +208,36 @@
     transform: scale(1.02);
 }
 
+.availability-status {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 2px 12px;
+    border-radius: 10px;
+}
+
+.status-online {
+    background-color: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+}
+
+.status-offline {
+    background-color: #fff1f2;
+    color: #e11d48;
+    border: 1px solid #fecdd3;
+}
+
+.unavailable-notice {
+    margin-left: 280px;
+    padding: 24px;
+    background-color: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    color: #64748b;
+    font-size: 15px;
+    text-align: center;
+}
+
 @media (max-width: 900px) {
     .doctor-detail-card {
         flex-direction: column;
@@ -219,7 +249,8 @@
         margin: 0 auto;
     }
 
-    .booking-slots-section {
+    .booking-slots-section,
+    .unavailable-notice {
         margin-left: 0;
     }
 }

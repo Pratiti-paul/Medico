@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from 'react-toastify';
 import API from "../services/api";
 import MedicineHero from "../components/MedicineHero";
 import { useCart } from "../context/CartContext";
@@ -178,7 +179,10 @@ export default function Medicines() {
                       return (
                          <button 
                            className="add-btn" 
-                           onClick={() => addToCart(med)}
+                           onClick={() => {
+                             addToCart(med);
+                             toast.success(`${med.name} added to cart!`);
+                           }}
                          >
                            Add to Cart
                          </button>

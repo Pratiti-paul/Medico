@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 import "./MyProfile.css";
 
 const MyProfile = () => {
@@ -62,10 +63,10 @@ const MyProfile = () => {
       });
       setUser(res.data.user);
       setIsEdit(false);
-      alert("Profile updated successfully!");
+      toast.success("Profile updated successfully!");
     } catch (error) {
       console.error(error);
-      alert(error.response?.data?.message || "Failed to update profile");
+      toast.error(error.response?.data?.message || "Failed to update profile");
     }
   };
 
@@ -86,10 +87,10 @@ const MyProfile = () => {
       
       // Update local state
       setAppointments((prev) => prev.filter((app) => app._id !== appId));
-      alert("Appointment cancelled successfully");
+      toast.success("Appointment cancelled successfully");
     } catch (error) {
       console.error(error);
-      alert(error.response?.data?.message || "Failed to cancel appointment");
+      toast.error(error.response?.data?.message || "Failed to cancel appointment");
     }
   };
 
@@ -104,108 +105,159 @@ const MyProfile = () => {
   const initials = user.name ? user.name.charAt(0).toUpperCase() : "?";
 
   return (
-    <div className="profile-container">
-      <div className="profile-content">
-        {/* User Info Card */}
-        <div className="profile-card">
-          <div className="profile-avatar">
-            {initials}
-          </div>
-          
-          {isEdit ? (
-            <div className="edit-form">
-              <input 
-                type="text" 
-                className="edit-input"
-                placeholder="Name"
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-              />
-              <input 
-                type="text" 
-                className="edit-input"
-                placeholder="Phone"
-                value={formData.phone}
-                onChange={(e) => setFormData({...formData, phone: e.target.value})}
-              />
-              <textarea 
-                className="edit-input edit-textarea"
-                placeholder="Address"
-                value={formData.address}
-                onChange={(e) => setFormData({...formData, address: e.target.value})}
-              ></textarea>
-              <div className="edit-actions">
-                <button className="save-btn" onClick={handleUpdate}>Save</button>
-                <button className="cancel-btn" onClick={() => setIsEdit(false)}>Cancel</button>
-              </div>
-            </div>
-          ) : (
-            <>
-              <h2 className="profile-name">{user.name}</h2>
-              <p className="profile-email">{user.email}</p>
-              
-              <div className="profile-info-grid">
-                <div className="info-item">
-                  <span className="info-label">Phone:</span>
-                  <span className="info-value">{user.phone || "Not set"}</span>
-                </div>
-                <div className="info-item">
-                  <span className="info-label">Address:</span>
-                  <span className="info-value">{user.address || "Not set"}</span>
-                </div>
-              </div>
-
-              <div className="profile-divider"></div>
-              
-              <div className="profile-meta">
-                <p className="meta-label">Account Created</p>
-                <p className="meta-value">{createdDate}</p>
-              </div>
-              
-              <div className="profile-btns">
-                <button className="edit-profile-btn" onClick={() => setIsEdit(true)}>
-                  Edit Profile
-                </button>
-                <button className="logout-btn" onClick={handleLogout}>
-                  Logout
-                </button>
-              </div>
-            </>
-          )}
+    <div className="profile-dashboard">
+      {/* Header Section */}
+      <header className="dashboard-header">
+        <div className="header-meta">
+          <h1>Welcome back, {user.name.split(' ')[0]} 👋</h1>
+          <p>Manage your appointments and personal health information securely.</p>
         </div>
+        <div className="header-actions">
+          {!isEdit && (
+            <button className="edit-btn-top" onClick={() => setIsEdit(true)}>
+              Edit Profile
+            </button>
+          )}
+          <button className="logout-btn-top" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+      </header>
 
-        {/* Appointment History Section */}
-        <div className="appointments-history">
-          <h2 className="history-title">My Appointments</h2>
-          {loadingApps ? (
-            <p className="loading-small">Loading appointments...</p>
-          ) : appointments.length > 0 ? (
-            <div className="appointments-list">
-              {appointments.map((app) => (
-                <div key={app._id} className="app-history-item">
-                  <div className="app-info">
-                    <p className="app-doc-name">{app.doctor?.name || "Doctor"}</p>
-                    <p className="app-doc-spec">{app.doctor?.specialization}</p>
-                    <p className="app-datetime">{app.date?.replace(/_/g, '/')} | {app.time}</p>
-                  </div>
-                  <div className="app-actions">
-                    <div className="app-price">
-                      ₹{app.doctor?.consultationFee}
+      <div className="dashboard-content">
+        {/* Sidebar: Profile Details */}
+        <aside className="profile-sidebar">
+          <div className="sidebar-card">
+            <div className="profile-avatar-large">
+              {initials}
+            </div>
+            
+            {isEdit ? (
+              <div className="edit-form-sidebar">
+                <div className="form-group">
+                  <label>Full Name</label>
+                  <input 
+                    type="text" 
+                    className="edit-input"
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Phone Number</label>
+                  <input 
+                    type="text" 
+                    className="edit-input"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Address</label>
+                  <textarea 
+                    className="edit-input"
+                    rows="3"
+                    value={formData.address}
+                    onChange={(e) => setFormData({...formData, address: e.target.value})}
+                  ></textarea>
+                </div>
+                <div className="edit-form-actions">
+                  <button className="save-btn-sidebar" onClick={handleUpdate}>Save Changes</button>
+                  <button className="cancel-btn-sidebar" onClick={() => setIsEdit(false)}>Cancel</button>
+                </div>
+              </div>
+            ) : (
+              <div className="profile-view-sidebar">
+                <h2 className="display-name">{user.name}</h2>
+                <p className="display-email">{user.email}</p>
+                
+                <div className="details-stack">
+                  <div className="detail-item">
+                    <span className="detail-icon">📞</span>
+                    <div className="detail-text">
+                      <label>Phone</label>
+                      <p>{user.phone || "Not provided"}</p>
                     </div>
-                    <button 
-                      className="cancel-app-btn"
-                      onClick={() => handleCancelApp(app._id)}
-                    >
-                      Cancel
-                    </button>
+                  </div>
+                  <div className="detail-item">
+                    <span className="detail-icon">📍</span>
+                    <div className="detail-text">
+                      <label>Address</label>
+                      <p>{user.address || "No address saved"}</p>
+                    </div>
+                  </div>
+                  <div className="detail-item">
+                    <span className="detail-icon">🗓️</span>
+                    <div className="detail-text">
+                      <label>Joined</label>
+                      <p>{createdDate}</p>
+                    </div>
                   </div>
                 </div>
-              ))}
+              </div>
+            )}
+          </div>
+        </aside>
+
+        {/* Main Area: Appointments */}
+        <main className="dashboard-main">
+          <div className="appointments-card">
+            <div className="card-header">
+              <h2>My Appointments</h2>
+              <span className="app-count">{appointments.length} scheduled</span>
             </div>
-          ) : (
-            <p className="no-appointments">No appointments found.</p>
-          )}
-        </div>
+            
+            {loadingApps ? (
+              <div className="loader-container">
+                <p className="loading-text-small">Fetching your appointments...</p>
+              </div>
+            ) : appointments.length > 0 ? (
+              <div className="appointments-grid">
+                {appointments.map((app) => (
+                  <div key={app._id} className="modern-app-card">
+                    <div className="app-main-info">
+                      <div className="doc-avatar-small">
+                        {app.doctor?.name?.charAt(0) || "D"}
+                      </div>
+                      <div className="doc-details">
+                        <p className="doc-name">{app.doctor?.name || "Doctor Name"}</p>
+                        <p className="doc-spec">{app.doctor?.specialization}</p>
+                      </div>
+                      <div className="app-status">Confirmed</div>
+                    </div>
+                    
+                    <div className="app-time-info">
+                      <div className="time-stat">
+                        <span>Date</span>
+                        <p>{app.date?.replace(/_/g, '/')}</p>
+                      </div>
+                      <div className="time-stat">
+                        <span>Time</span>
+                        <p>{app.time}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="app-footer">
+                      <span className="consult-fee">₹{app.doctor?.consultationFee}</span>
+                      <button 
+                        className="cancel-link"
+                        onClick={() => handleCancelApp(app._id)}
+                      >
+                        Cancel Appointment
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="empty-state">
+                <div className="empty-icon">📅</div>
+                <p>No upcoming appointments found.</p>
+                <button className="book-btn-empty" onClick={() => navigate('/home')}>Book Now</button>
+              </div>
+            )}
+          </div>
+        </main>
       </div>
     </div>
   );

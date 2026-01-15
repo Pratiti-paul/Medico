@@ -1,27 +1,31 @@
 import React from 'react';
 import './OfferingsSection.css';
+import icon1 from '../assets/1.png';
+import icon2 from '../assets/2.png';
+import icon3 from '../assets/3.png';
+import icon4 from '../assets/4.png';
 
 const OfferingsSection = () => {
   const offerings = [
     {
       title: "Doctor Appointments",
       description: "Browse verified doctors, check availability, and book appointments instantly without long waiting times.",
-      icon: "https://via.placeholder.com/60?text=Doc" // Placeholder
+      icon: icon1
     },
     {
         title: "Online Medicine Store",
         description: "Order medicines online from trusted sources and get them delivered right to your doorstep.",
-        icon: "https://via.placeholder.com/60?text=Med"
+        icon: icon2
     },
     {
         title: "Health Records",
         description: "Securely manage your medical history and prescriptions in one place for easy access anytime.",
-        icon: "https://via.placeholder.com/60?text=Rec"
+        icon: icon3
     },
     {
         title: "Trusted Platform",
         description: "We prioritize data security and transparency, ensuring your information stays safe and confidential.",
-        icon: "https://via.placeholder.com/60?text=Safe"
+        icon: icon4
     }
   ];
 

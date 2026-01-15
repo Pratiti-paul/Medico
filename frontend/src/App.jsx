@@ -11,6 +11,8 @@ import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Layout from "./components/Layout";
 import { CartProvider } from "./context/CartContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -21,6 +23,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <CartProvider>
+        <ToastContainer position="top-right" autoClose={3000} />
         <Routes>
           <Route path="/" element={<Signup />} />
           <Route path="/login" element={<Login />} />

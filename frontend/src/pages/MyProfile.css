@@ -1,322 +1,410 @@
-.profile-container {
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    background-color: #f8f9fa;
-    min-height: 90vh;
-}
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
-.profile-content {
-    display: flex;
-    gap: 2.5rem;
-    max-width: 1000px;
-    width: 100%;
-    align-items: flex-start;
-}
-
-.profile-card {
-    background: white;
-    width: 320px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    padding: 2.5rem 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.profile-avatar {
-    width: 80px;
-    height: 80px;
-    background-color: #2563eb;
-    color: white;
-    font-size: 2.2rem;
-    font-weight: 600;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.profile-name {
-    font-size: 1.4rem;
-    font-weight: 700;
+.profile-dashboard {
+    padding: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Outfit', sans-serif;
     color: #1e293b;
-    margin-bottom: 0.2rem;
+    background-color: #f8fafc;
+    min-height: 100vh;
 }
 
-.profile-email {
-    color: #64748b;
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-}
-
-.profile-divider {
-    width: 100%;
-    height: 1px;
-    background-color: #f1f5f9;
-    margin: 1.2rem 0;
-}
-
-.profile-info-grid {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    margin-bottom: 1rem;
-    text-align: left;
-}
-
-.info-item {
+/* Dashboard Header */
+.dashboard-header {
     display: flex;
     justify-content: space-between;
-    font-size: 0.9rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
 }
 
-.info-label {
+.header-meta h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #0f172a;
+}
+
+.header-meta p {
     color: #64748b;
-    font-weight: 500;
+    font-size: 1rem;
 }
 
-.info-value {
-    color: #1e293b;
-    font-weight: 600;
-}
-
-.profile-meta {
-    margin-bottom: 1.5rem;
-}
-
-.meta-label {
-    font-size: 0.85rem;
-    color: #64748b;
-    margin-bottom: 0.2rem;
-}
-
-.meta-value {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #333;
-}
-
-.profile-btns {
+.header-actions {
     display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    width: 100%;
+    gap: 1rem;
 }
 
-.edit-profile-btn {
+.edit-btn-top {
     background-color: #2563eb;
     color: white;
     border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 500;
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
-    width: 100%;
 }
 
-.edit-profile-btn:hover {
-    background-color: #1d4ed8;
-    transform: translateY(-1px);
-}
-
-.logout-btn {
-    background-color: white;
+.logout-btn-top {
+    background-color: transparent;
     color: #ef4444;
     border: 1px solid #ef4444;
-    padding: 0.75rem 2rem;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 500;
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
-    width: 100%;
 }
 
-.logout-btn:hover {
-    background-color: #fef2f2;
+.edit-btn-top:hover {
+    background-color: #1d4ed8;
 }
 
-/* Edit Form */
-.edit-form {
-    width: 100%;
+.logout-btn-top:hover {
+    background-color: #fee2e2;
+}
+
+/* Dashboard Content Grid */
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Sidebar Styling */
+.sidebar-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f1f5f9;
+}
+
+.profile-avatar-large {
+    width: 100px;
+    height: 100px;
+    background-color: #f1f5f9;
+    color: #2563eb;
+    font-size: 3rem;
+    font-weight: 700;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    border: 2px solid #e2e8f0;
+}
+
+.display-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.3rem;
+}
+
+.display-email {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.details-stack {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
     gap: 1rem;
+    padding: 0.5rem;
+}
+
+.detail-icon {
+    font-size: 1.25rem;
+    background: #f8fafc;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.detail-text label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #94a3b8;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+}
+
+.detail-text p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #334155;
+}
+
+/* Edit Form Sidebar */
+.edit-form-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #64748b;
 }
 
 .edit-input {
     width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
+    padding: 0.75rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
     font-size: 0.95rem;
     font-family: inherit;
+    transition: border-color 0.2s;
 }
 
-.edit-textarea {
-    resize: vertical;
-    min-height: 80px;
+.edit-input:focus {
+    outline: none;
+    border-color: #2563eb;
 }
 
-.edit-actions {
+.edit-form-actions {
     display: flex;
-    gap: 0.8rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
 }
 
-.save-btn {
-    flex: 1;
+.save-btn-sidebar {
     background-color: #10b981;
     color: white;
     border: none;
     padding: 0.75rem;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
 }
 
-.cancel-btn {
-    flex: 1;
-    background-color: #94a3b8;
-    color: white;
+.cancel-btn-sidebar {
+    background: #f1f5f9;
+    color: #64748b;
     border: none;
     padding: 0.75rem;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
 }
 
-/* Appointment History */
-.appointments-history {
-    flex-grow: 1;
+/* Main Area - Appointments Card */
+.appointments-card {
     background: white;
     padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f5f9;
+    min-height: 500px;
 }
 
-.history-title {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid #2563eb;
-    padding-bottom: 0.5rem;
-    display: inline-block;
-}
-
-.appointments-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.app-history-item {
+.card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem;
-    border: 1px solid #f1f5f9;
-    border-radius: 10px;
-    transition: all 0.2s;
+    margin-bottom: 2rem;
 }
 
-.app-history-item:hover {
-    border-color: #2563eb;
-    background-color: #f0f7ff;
+.card-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
 }
 
-.app-doc-name {
+.app-count {
+    font-size: 0.85rem;
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
     font-weight: 600;
-    color: #1e293b;
-    font-size: 1.05rem;
+}
+
+.appointments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.modern-app-card {
+    background: #fdfdfd;
+    border: 1.5px solid #f1f5f9;
+    border-radius: 18px;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-app-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    border-color: #e0f2fe;
+}
+
+.app-main-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.doc-avatar-small {
+    width: 45px;
+    height: 45px;
+    background: #2563eb;
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.doc-details {
+    flex: 1;
+}
+
+.doc-name {
+    font-weight: 600;
+    color: #0f172a;
+    font-size: 1rem;
+}
+
+.doc-spec {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.app-status {
+    font-size: 0.75rem;
+    background: #f0fdf4;
+    color: #16a34a;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.app-time-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.time-stat span {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #94a3b8;
+    display: block;
     margin-bottom: 0.2rem;
 }
 
-.app-doc-spec {
+.time-stat p {
     font-size: 0.9rem;
-    color: #64748b;
-    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: #334155;
 }
 
-.app-datetime {
-    font-size: 0.85rem;
-    color: #2563eb;
-    font-weight: 500;
-}
-
-.app-actions {
+.app-footer {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.8rem;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.app-price {
+.consult-fee {
     font-weight: 700;
-    color: #1e293b;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
+    color: #0f172a;
 }
 
-.cancel-app-btn {
-    background-color: transparent;
-    color: #ef4444;
-    border: 1px solid #ef4444;
-    padding: 0.4rem 1rem;
-    border-radius: 6px;
+.cancel-link {
+    background: none;
+    border: none;
+    color: #94a3b8;
     font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
+    padding: 0;
+    transition: color 0.2s;
 }
 
-.cancel-app-btn:hover {
-    background-color: #ef4444;
-    color: white;
+.cancel-link:hover {
+    color: #ef4444;
+    text-decoration: underline;
 }
 
-.no-appointments {
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0;
     color: #94a3b8;
-    text-align: center;
-    padding: 3rem 0;
-    font-style: italic;
 }
 
-.loading-small {
-    color: #64748b;
-    font-style: italic;
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
 }
 
-@media (max-width: 850px) {
-    .profile-content {
-        flex-direction: column;
-        align-items: center;
+.book-btn-empty {
+    margin-top: 1.5rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-content {
+        grid-template-columns: 1fr;
     }
 
-    .profile-card,
-    .appointments-history {
-        width: 100%;
+    .profile-sidebar {
+        order: 1;
+    }
+
+    .dashboard-main {
+        order: 2;
     }
 }
 
-@media (max-width: 480px) {
-    .app-history-item {
+@media (max-width: 640px) {
+    .dashboard-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
+        gap: 1.5rem;
     }
 
-    .app-actions {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+    .profile-dashboard {
+        padding: 1.5rem;
+    }
+
+    .appointments-grid {
+        grid-template-columns: 1fr;
     }
 }

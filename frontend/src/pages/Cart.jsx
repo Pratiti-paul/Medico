@@ -1,6 +1,7 @@
 
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
 import "./Cart.css";
 
 const Cart = () => {
@@ -61,7 +62,10 @@ const Cart = () => {
                 </button>
                 <button 
                   className="remove-btn"
-                  onClick={() => removeFromCart(item._id)}
+                  onClick={() => {
+                    removeFromCart(item._id);
+                    toast.info(`${item.name} removed from cart`);
+                  }}
                 >
                   Remove
                 </button>
@@ -98,7 +102,12 @@ const Cart = () => {
             <span>₹ {cartTotal}</span>
           </div>
 
-          <button className="checkout-btn">Proceed to Checkout</button>
+          <button 
+            className="checkout-btn"
+            onClick={() => toast.success("Order placed successfully! (Demo)")}
+          >
+            Proceed to Checkout
+          </button>
         </div>
       </div>
     </div>

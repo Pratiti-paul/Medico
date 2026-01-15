@@ -1,49 +1,59 @@
-// import patient1 from "../assets/patient1.png";
-// import patient2 from "../assets/patient2.png";
-const patient1 = "https://via.placeholder.com/50?text=P1";
-const patient2 = "https://via.placeholder.com/50?text=P2";
+import user1 from "../assets/User Icon (1).png";
+import user2 from "../assets/User Icon (2).png";
+import user3 from "../assets/User Icon (3).png";
+import user4 from "../assets/User Icon (4).png";
+import user5 from "../assets/User Icon (5).png";
+import user6 from "../assets/User Icon (6).png";
 import "./Testimonials.css";
 
 const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Sarah J.",
-      location: "Bangalore",
-      text: "Booking appointments was super easy and quick. Highly recommended for everyone.",
-      image: patient1,
+      name: "Aditya Kashyap",
+      location: "Kolkata",
+      text: "Medico made booking a doctor extremely easy. I found a good cardiologist within minutes and the appointment was confirmed instantly. Very smooth experience.",
+      image: user1,
       role: "Patient"
     },
     {
       id: 2,
-      name: "Mike T.",
+      name: "Sonakshi Bose",
       location: "Delhi",
       text: "Medicines arrived on time with proper packaging. Great service overall.",
-      image: patient2,
+      image: user2,
       role: "Patient"
     },
     {
       id: 3,
-      name: "Emily R.",
+      name: "Mihir Virani",
       location: "Mumbai",
-      text: "The doctors are very professional and the video consultation was seamless.",
-      image: patient1, // Reusing due to quota
+      text: "Medico feels like a complete healthcare solution. Booking, consultation, and medicines everything works smoothly.",
+      image: user3,
       role: "Patient"
     },
     {
       id: 4,
-      name: "David K.",
+      name: "Sameer Maheshwari",
       location: "Chennai",
       text: "I love the convenience of having everything in one app. Very user friendly.",
-      image: patient2, // Reusing
+      image: user4,
       role: "Patient"
     },
     {
       id: 5,
-      name: "Priya S.",
-      location: "Hyderabad",
+      name: "Naina Aggarwal",
+      location: "Ahmedabad",
       text: "Excellent customer support and fast delivery of medicines.",
-      image: patient1,
+      image: user5,
+      role: "Patient"
+    },
+    {
+      id: 6,
+      name: "Arushi Jha",
+      location: "Mumbai",
+      text: "Very helpful app for busy people. I like how appointment history and medicine orders are managed in one place.",
+      image: user6,
       role: "Patient"
     }
   ];
