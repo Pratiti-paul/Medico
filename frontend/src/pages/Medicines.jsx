@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import API from "../services/api";
 import MedicineHero from "../components/MedicineHero";
 import { useCart } from "../context/CartContext";
+import Loader from "../components/Loader/Loader";
 import "./Medicines.css";
 
 export default function Medicines() {
@@ -98,7 +99,7 @@ export default function Medicines() {
   const startItem = (page - 1) * PER_PAGE + 1;
   const endItem = Math.min(page * PER_PAGE, totalMedicines);
 
-  if (loading && page === 1 && !medicines.length) return <p style={{textAlign:'center', marginTop: '2rem'}}>Loading medicines...</p>;
+  if (loading && page === 1 && !medicines.length) return <Loader fullPage />;
   if (error) return <p style={{textAlign:'center', color:'red', marginTop: '2rem'}}>{error}</p>;
 
   return (
