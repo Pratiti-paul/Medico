@@ -10,6 +10,7 @@ const Signup = () => {
     name: "",
     email: "",
     password: "",
+    role: "user",
   });
   const [error, setError] = useState("");
 
@@ -79,6 +80,23 @@ const Signup = () => {
               onChange={handleChange}
               required
             />
+            <div className="role-selection">
+              <button 
+                type="button" 
+                className={`role-btn ${formData.role === 'user' ? 'active' : ''}`}
+                onClick={() => setFormData({...formData, role: 'user'})}
+              >
+                Patient
+              </button>
+              <button 
+                type="button" 
+                className={`role-btn ${formData.role === 'admin' ? 'active' : ''}`}
+                onClick={() => setFormData({...formData, role: 'admin'})}
+              >
+                Admin
+              </button>
+            </div>
+
             <button className="auth-button" type="submit">Sign Up</button>
           </form>
           <div className="auth-text-link">

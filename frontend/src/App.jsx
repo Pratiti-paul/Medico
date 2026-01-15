@@ -11,6 +11,8 @@ import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import MyOrders from "./pages/MyOrders";
+import AdminLayout from "./components/Admin/AdminLayout";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 import Layout from "./components/Layout";
 import { CartProvider } from "./context/CartContext";
 import { ToastContainer } from 'react-toastify';
@@ -19,6 +21,12 @@ import 'react-toastify/dist/ReactToastify.css';
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
   return token ? children : <Navigate to="/login" />;
+};
+
+const AdminRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+  return token && role === "admin" ? children : <Navigate to="/login" />;
 };
 
 export default function App() {
@@ -42,6 +50,11 @@ export default function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/my-orders" element={<MyOrders />} />
           </Route>
+
+           {/* Admin Routes */}
+           <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+             <Route path="dashboard" element={<AdminDashboard />} />
+           </Route>
         </Routes>
       </CartProvider>
     </BrowserRouter>

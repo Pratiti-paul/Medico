@@ -3,7 +3,7 @@ const { registerUser, loginUser, getProfile, updateProfile } = require("../contr
 
 const router = express.Router();
 
-const protect = require("../middleware/authMiddleware");
+const { protect } = require("../middleware/authMiddleware");
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);

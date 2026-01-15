@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import "./Login.css";
 
@@ -9,6 +9,7 @@ const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    role: "user",
   });
   const [error, setError] = useState("");
 
@@ -38,10 +39,15 @@ const Login = () => {
       // Success - Save token
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("role", data.user.role);
 
-      // Navigate to main project (Doctors page as default dashboard)
+      // Navigate based on role
       toast.success("Logged in successfully!");
-      navigate("/home");
+      if (data.user.role === 'admin') {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/home");
+      }
     } catch (err) {
       setError(err.message);
       toast.error(err.message);
@@ -73,8 +79,29 @@ const Login = () => {
               onChange={handleChange}
               required
             />
+            <div className="role-selection">
+              <button 
+                type="button" 
+                className={`role-btn ${formData.role === 'user' ? 'active' : ''}`}
+                onClick={() => setFormData({...formData, role: 'user'})}
+              >
+                Patient
+              </button>
+              <button 
+                type="button" 
+                className={`role-btn ${formData.role === 'admin' ? 'active' : ''}`}
+                onClick={() => setFormData({...formData, role: 'admin'})}
+              >
+                Admin
+              </button>
+            </div>
+
             <button className="auth-button" type="submit">Login</button>
           </form>
+          <div className="auth-text-link">
+            Don't have an account? 
+            <Link to="/">Sign Up</Link>
+          </div>
         </div>
       </div>
     </div>

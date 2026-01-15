@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import Loader from "../components/Loader/Loader";
+import PhoneIcon from "../assets/Phone Call Icon.png";
+import AddressIcon from "../assets/Address Maps and Flags.png";
+import CalendarIcon from "../assets/Calendar Icon.png";
+
 import "./MyProfile.css";
 
 const MyProfile = () => {
@@ -110,7 +114,7 @@ const MyProfile = () => {
       {/* Header Section */}
       <header className="dashboard-header">
         <div className="header-meta">
-          <h1>Welcome back, {user.name.split(' ')[0]} 👋</h1>
+          <h1>Welcome back, {user.name.split(' ')[0]}</h1>
           <p>Manage your appointments and personal health information securely.</p>
         </div>
         <div className="header-actions">
@@ -174,21 +178,27 @@ const MyProfile = () => {
                 
                 <div className="details-stack">
                   <div className="detail-item">
-                    <span className="detail-icon">📞</span>
+                    <span className="detail-icon">
+                      <img src={PhoneIcon} alt="Phone" />
+                    </span>
                     <div className="detail-text">
                       <label>Phone</label>
                       <p>{user.phone || "Not provided"}</p>
                     </div>
                   </div>
                   <div className="detail-item">
-                    <span className="detail-icon">📍</span>
+                    <span className="detail-icon">
+                      <img src={AddressIcon} alt="Address" />
+                    </span>
                     <div className="detail-text">
                       <label>Address</label>
                       <p>{user.address || "No address saved"}</p>
                     </div>
                   </div>
                   <div className="detail-item">
-                    <span className="detail-icon">🗓️</span>
+                    <span className="detail-icon">
+                      <img src={CalendarIcon} alt="Calendar" />
+                    </span>
                     <div className="detail-text">
                       <label>Joined</label>
                       <p>{createdDate}</p>
@@ -250,7 +260,9 @@ const MyProfile = () => {
               </div>
             ) : (
               <div className="empty-state">
-                <div className="empty-icon">📅</div>
+                <div className="empty-icon">
+                  <img src={CalendarIcon} alt="No appointments" />
+                </div>
                 <p>No upcoming appointments found.</p>
                 <button className="book-btn-empty" onClick={() => navigate('/home')}>Book Now</button>
               </div>

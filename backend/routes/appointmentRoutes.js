@@ -5,7 +5,7 @@ const {
   getDoctorAppointments,
   cancelAppointment
 } = require("../controllers/appointmentController");
-const protect = require("../middleware/authMiddleware");
+const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 

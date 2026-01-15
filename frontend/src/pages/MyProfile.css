@@ -131,6 +131,12 @@
     border-radius: 10px;
 }
 
+.detail-icon img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
 .detail-text label {
     display: block;
     font-size: 0.75rem;
@@ -361,8 +367,13 @@
 }
 
 .empty-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.empty-icon img {
+    width: 80px;
+    height: 80px;
+    opacity: 0.5;
 }
 
 .book-btn-empty {
