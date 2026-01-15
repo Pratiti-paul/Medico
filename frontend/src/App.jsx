@@ -9,6 +9,8 @@ import DoctorProfile from "./pages/DoctorProfile";
 import MyProfile from "./pages/MyProfile";
 import About from "./pages/About";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import MyOrders from "./pages/MyOrders";
 import Layout from "./components/Layout";
 import { CartProvider } from "./context/CartContext";
 import { ToastContainer } from 'react-toastify';
@@ -37,6 +39,8 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/profile" element={<MyProfile />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/my-orders" element={<MyOrders />} />
           </Route>
         </Routes>
       </CartProvider>

@@ -8,6 +8,7 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  font-family: Georgia;
 }
 
 .navbar-brand h1 {
@@ -132,6 +133,7 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: background 0.1s;
+  font-family: Georgia;
 }
 
 .menu-item:hover {

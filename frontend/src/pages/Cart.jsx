@@ -1,11 +1,11 @@
-
 import { useCart } from "../context/CartContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import "./Cart.css";
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, cartTotal } = useCart();
+  const navigate = useNavigate();
 
   if (cartItems.length === 0) {
     return (
@@ -104,7 +104,7 @@ const Cart = () => {
 
           <button 
             className="checkout-btn"
-            onClick={() => toast.success("Order placed successfully! (Demo)")}
+            onClick={() => navigate('/checkout')}
           >
             Proceed to Checkout
           </button>

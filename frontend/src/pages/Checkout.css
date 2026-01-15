@@ -1,0 +1,175 @@
+.checkout-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.checkout-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: #1a1a1a;
+    text-align: center;
+}
+
+.checkout-content {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.payment-selection h3,
+.order-summary-checkout h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.payment-card {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.payment-card:hover {
+    border-color: #5f6fff;
+    background-color: #f8fbff;
+}
+
+.payment-card.active {
+    border-color: #5f6fff;
+    background-color: #f0f3ff;
+    box-shadow: 0 4px 12px rgba(95, 111, 255, 0.1);
+}
+
+.payment-card .icon {
+    font-size: 1.8rem;
+    margin-right: 1.5rem;
+}
+
+.payment-card .info {
+    flex: 1;
+}
+
+.payment-card .info strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.payment-card .info p {
+    font-size: 0.85rem;
+    color: #757575;
+}
+
+.payment-card .radio {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    position: relative;
+}
+
+.payment-card.active .radio {
+    border-color: #5f6fff;
+}
+
+.payment-card.active .radio::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #5f6fff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.order-summary-checkout {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.summary-details .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.summary-details .row.total {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-top: 1rem;
+}
+
+.summary-details .divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 1.5rem 0;
+}
+
+.summary-details .row .free {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.pay-now-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background-color: #5f6fff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pay-now-btn:hover:not(:disabled) {
+    background-color: #4b59f5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(95, 111, 255, 0.3);
+}
+
+.pay-now-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.secure-text {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+@media (max-width: 900px) {
+    .checkout-content {
+        grid-template-columns: 1fr;
+    }
+
+    .order-summary-checkout {
+        order: -1;
+    }
+}

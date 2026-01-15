@@ -23,6 +23,21 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: true
     },
+    orderId: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    paymentMethod: {
+      type: String,
+      enum: ["UPI", "Card", "COD"],
+      required: true
+    },
+    paymentStatus: {
+      type: String,
+      enum: ["paid", "pending"],
+      default: "pending"
+    },
     status: {
       type: String,
       enum: ["placed", "delivered"],

@@ -65,6 +65,7 @@ export default function Navbar() {
             {menuOpen && (
               <div ref={menuRef} className="account-menu" role="menu">
                 <button className="menu-item" onClick={() => navigate('/profile')}>Profile</button>
+                <button className="menu-item" onClick={() => navigate('/my-orders')}>Order History</button>
                 <button className="menu-item" onClick={handleLogout}>Logout</button>
               </div>
             )}

@@ -3,12 +3,18 @@ const Order = require("../models/Order");
 // PLACE order
 exports.placeOrder = async (req, res) => {
   try {
-    const { medicines, totalAmount } = req.body;
+    const { medicines, totalAmount, paymentMethod } = req.body;
+    
+    // Simple custom order ID generator
+    const orderId = "ORD" + Math.random().toString(36).substr(2, 9).toUpperCase();
 
     const order = await Order.create({
       patient: req.user._id,
       medicines,
-      totalAmount
+      totalAmount,
+      paymentMethod,
+      orderId,
+      paymentStatus: paymentMethod === "COD" ? "pending" : "paid"
     });
 
     res.status(201).json({
