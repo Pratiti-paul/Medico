@@ -43,6 +43,13 @@
     border-radius: 10px;
 }
 
+.stat-asset-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+}
+
 /* Card Colors as per design */
 .stat-card.blue {
     border-bottom: 4px solid #3b82f6;

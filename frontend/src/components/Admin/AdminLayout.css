@@ -36,6 +36,16 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    transition: all 0.2s;
+}
+
+.header-right:hover {
+    opacity: 0.8;
+}
+
+.header-right:hover .admin-profile-circle {
+    border-color: #2452a3;
+    background-color: white;
 }
 
 .welcome-text {

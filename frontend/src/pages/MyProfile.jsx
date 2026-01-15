@@ -41,11 +41,13 @@ const MyProfile = () => {
           address: profileRes.data.address || ""
         });
 
-        // Fetch appointments
-        const appRes = await axios.get("http://localhost:5001/api/appointments/my", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        setAppointments(appRes.data);
+        // Fetch appointments (Only for Patients)
+        if (profileRes.data.role !== 'admin') {
+          const appRes = await axios.get("http://localhost:5001/api/appointments/my", {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          setAppointments(appRes.data);
+        }
       } catch (error) {
         console.error(error);
         if (error.response?.status === 401) {
@@ -91,7 +93,7 @@ const MyProfile = () => {
       });
       
       // Update local state
-      setAppointments((prev) => prev.filter((app) => app._id !== appId));
+      setAppointments((prev) => prev.map((app) => app._id === appId ? { ...app, status: "cancelled" } : app));
       toast.success("Appointment cancelled successfully");
     } catch (error) {
       console.error(error);
@@ -115,7 +117,11 @@ const MyProfile = () => {
       <header className="dashboard-header">
         <div className="header-meta">
           <h1>Welcome back, {user.name.split(' ')[0]}</h1>
-          <p>Manage your appointments and personal health information securely.</p>
+          <p>
+            {user.role === 'admin' 
+              ? 'Administrate the platform and manage your profile details.' 
+              : 'Manage your appointments and personal health information securely.'}
+          </p>
         </div>
         <div className="header-actions">
           {!isEdit && (
@@ -210,65 +216,89 @@ const MyProfile = () => {
           </div>
         </aside>
 
-        {/* Main Area: Appointments */}
-        <main className="dashboard-main">
-          <div className="appointments-card">
-            <div className="card-header">
-              <h2>My Appointments</h2>
-              <span className="app-count">{appointments.length} scheduled</span>
-            </div>
-            
-            {loadingApps ? (
-              <Loader />
-            ) : appointments.length > 0 ? (
-              <div className="appointments-grid">
-                {appointments.map((app) => (
-                  <div key={app._id} className="modern-app-card">
-                    <div className="app-main-info">
-                      <div className="doc-avatar-small">
-                        {app.doctor?.name?.charAt(0) || "D"}
-                      </div>
-                      <div className="doc-details">
-                        <p className="doc-name">{app.doctor?.name || "Doctor Name"}</p>
-                        <p className="doc-spec">{app.doctor?.specialization}</p>
-                      </div>
-                      <div className="app-status">Confirmed</div>
-                    </div>
-                    
-                    <div className="app-time-info">
-                      <div className="time-stat">
-                        <span>Date</span>
-                        <p>{app.date?.replace(/_/g, '/')}</p>
-                      </div>
-                      <div className="time-stat">
-                        <span>Time</span>
-                        <p>{app.time}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="app-footer">
-                      <span className="consult-fee">₹{app.doctor?.consultationFee}</span>
-                      <button 
-                        className="cancel-link"
-                        onClick={() => handleCancelApp(app._id)}
-                      >
-                        Cancel Appointment
-                      </button>
-                    </div>
-                  </div>
-                ))}
+        {/* Main Area: Appointments (Only for Patients) */}
+        {user.role !== 'admin' && (
+          <main className="dashboard-main">
+            <div className="appointments-card">
+              <div className="card-header">
+                <h2>My Appointments</h2>
+                <span className="app-count">{appointments.length} scheduled</span>
               </div>
-            ) : (
-              <div className="empty-state">
-                <div className="empty-icon">
-                  <img src={CalendarIcon} alt="No appointments" />
+              
+              {loadingApps ? (
+                <Loader />
+              ) : appointments.length > 0 ? (
+                <div className="appointments-grid">
+                  {appointments.map((app) => (
+                    <div key={app._id} className="modern-app-card">
+                      <div className="app-main-info">
+                        <div className="doc-avatar-small">
+                          {app.doctor?.name?.charAt(0) || "D"}
+                        </div>
+                        <div className="doc-details">
+                          <p className="doc-name">{app.doctor?.name || "Doctor Name"}</p>
+                          <p className="doc-spec">{app.doctor?.specialization}</p>
+                        </div>
+                        <div className={`app-status ${app.status || 'booked'}`}>
+                          {app.status === 'booked' ? 'Confirmed' : 'Cancelled'}
+                        </div>
+                      </div>
+                      
+                      <div className="app-time-info">
+                        <div className="time-stat">
+                          <span>Date</span>
+                          <p>{app.date?.replace(/_/g, '/')}</p>
+                        </div>
+                        <div className="time-stat">
+                          <span>Time</span>
+                          <p>{app.time}</p>
+                        </div>
+                      </div>
+                      
+                      <div className="app-footer">
+                        <span className="consult-fee">₹{app.doctor?.consultationFee}</span>
+                        {app.status !== 'cancelled' ? (
+                          <button 
+                            className="cancel-link"
+                            onClick={() => handleCancelApp(app._id)}
+                          >
+                            Cancel Appointment
+                          </button>
+                        ) : (
+                          <span className="cancelled-label">Meeting Cancelled</span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <p>No upcoming appointments found.</p>
-                <button className="book-btn-empty" onClick={() => navigate('/home')}>Book Now</button>
+              ) : (
+                <div className="empty-state">
+                  <div className="empty-icon">
+                    <img src={CalendarIcon} alt="No appointments" />
+                  </div>
+                  <p>No upcoming appointments found.</p>
+                  <button className="book-btn-empty" onClick={() => navigate('/home')}>Book Now</button>
+                </div>
+              )}
+            </div>
+          </main>
+        )}
+
+        {/* Admin Dashboard Quick Link (Only for Admins) */}
+        {user.role === 'admin' && (
+          <main className="dashboard-main">
+            <div className="appointments-card">
+              <div className="card-header">
+                <h2>Admin Control</h2>
               </div>
-            )}
-          </div>
-        </main>
+              <div className="empty-state">
+                <div className="empty-icon">🛡️</div>
+                <p>You have Administrative access. Manage the platform from the dashboard.</p>
+                <button className="book-btn-empty" onClick={() => navigate('/admin/dashboard')}>Go to Dashboard</button>
+              </div>
+            </div>
+          </main>
+        )}
       </div>
     </div>
   );

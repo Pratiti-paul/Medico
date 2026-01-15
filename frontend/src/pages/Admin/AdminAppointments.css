@@ -1,0 +1,84 @@
+.entity-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.entity-name {
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.entity-sub {
+    font-size: 0.8rem;
+    color: #718096;
+}
+
+.date-time-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.date-val {
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.time-val {
+    font-size: 0.85rem;
+    color: #3182ce;
+    font-weight: 700;
+}
+
+.status-badge {
+    padding: 0.25rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.status-badge.booked {
+    background: #c6f6d5;
+    color: #22543d;
+}
+
+.status-badge.cancelled {
+    background: #fed7d7;
+    color: #822727;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn.approve {
+    background-color: #ebfcf5;
+    color: #10b981;
+}
+
+.action-btn.approve:hover {
+    background-color: #10b981;
+    color: white;
+}
+
+.action-btn.deny {
+    background-color: #fff5f5;
+    color: #e53e3e;
+}
+
+.action-btn.deny:hover {
+    background-color: #e53e3e;
+    color: white;
+}

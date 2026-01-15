@@ -13,6 +13,10 @@ import Checkout from "./pages/Checkout";
 import MyOrders from "./pages/MyOrders";
 import AdminLayout from "./components/Admin/AdminLayout";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
+import AdminDoctors from "./pages/Admin/AdminDoctors";
+import AdminAppointments from "./pages/Admin/AdminAppointments";
+import AdminMedicines from "./pages/Admin/AdminMedicines";
+import AdminOrders from "./pages/Admin/AdminOrders";
 import Layout from "./components/Layout";
 import { CartProvider } from "./context/CartContext";
 import { ToastContainer } from 'react-toastify';
@@ -54,6 +58,11 @@ export default function App() {
            {/* Admin Routes */}
            <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
              <Route path="dashboard" element={<AdminDashboard />} />
+             <Route path="doctors" element={<AdminDoctors />} />
+             <Route path="appointments" element={<AdminAppointments />} />
+             <Route path="medicines" element={<AdminMedicines />} />
+             <Route path="orders" element={<AdminOrders />} />
+             <Route path="profile" element={<MyProfile />} />
            </Route>
         </Routes>
       </CartProvider>

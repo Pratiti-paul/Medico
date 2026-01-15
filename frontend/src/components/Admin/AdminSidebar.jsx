@@ -1,6 +1,10 @@
-import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import DashboardIcon from '../../assets/Dashboard Icon.png';
+import DoctorIcon from '../../assets/Doctors Stethoscope.png';
+import MedicineIcon from '../../assets/Medicines Icon.png';
+import AppointmentIcon from '../../assets/Appointment Icon.png';
+import OrderIcon from '../../assets/Shopping Cart Icon.png';
 import './AdminSidebar.css';
 
 const AdminSidebar = () => {
@@ -17,36 +21,29 @@ const AdminSidebar = () => {
     return (
         <aside className="admin-sidebar">
             <div className="admin-brand">
-                <div className="brand-logo">
-                    <span className="plus">+</span>
-                </div>
                 <h1>Medico <span>Admin</span></h1>
             </div>
 
             <nav className="admin-nav">
                 <NavLink to="/admin/dashboard" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-                    <span className="nav-icon">🏠</span>
+                    <img src={DashboardIcon} alt="Dashboard" className="sidebar-asset-icon" />
                     Dashboard
                 </NavLink>
                 <NavLink to="/admin/doctors" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-                    <span className="nav-icon">🔗</span>
+                    <img src={DoctorIcon} alt="Doctors" className="sidebar-asset-icon" />
                     Doctors
                 </NavLink>
                 <NavLink to="/admin/medicines" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-                    <span className="nav-icon">💊</span>
+                    <img src={MedicineIcon} alt="Medicines" className="sidebar-asset-icon" />
                     Medicines
                 </NavLink>
                 <NavLink to="/admin/appointments" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-                    <span className="nav-icon">📱</span>
+                    <img src={AppointmentIcon} alt="Appointments" className="sidebar-asset-icon" />
                     Appointments
                 </NavLink>
                 <NavLink to="/admin/orders" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-                    <span className="nav-icon">📋</span>
+                    <img src={OrderIcon} alt="Orders" className="sidebar-asset-icon" />
                     Orders
-                </NavLink>
-                <NavLink to="/admin/feedback" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-                    <span className="nav-icon">💬</span>
-                    Feedback
                 </NavLink>
             </nav>
 

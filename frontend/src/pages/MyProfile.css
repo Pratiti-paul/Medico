@@ -304,6 +304,11 @@
     font-weight: 600;
 }
 
+.app-status.cancelled {
+    background: #fff1f2;
+    color: #e11d48;
+}
+
 .app-time-info {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -355,6 +360,15 @@
 .cancel-link:hover {
     color: #ef4444;
     text-decoration: underline;
+}
+
+.cancelled-label {
+    color: #ef4444;
+    font-weight: 700;
+    font-size: 0.8rem;
+    background: #fff1f2;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
 }
 
 .empty-state {

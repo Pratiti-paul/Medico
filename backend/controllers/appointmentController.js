@@ -72,7 +72,7 @@ exports.cancelAppointment = async (req, res) => {
       return res.status(403).json({ message: "Not authorized to cancel this appointment" });
     }
 
-    await Appointment.findByIdAndDelete(id);
+    await Appointment.findByIdAndUpdate(id, { status: "cancelled" });
 
     res.json({ message: "Appointment cancelled successfully" });
   } catch (error) {

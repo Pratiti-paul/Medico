@@ -1,9 +1,10 @@
 import React from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, Navigate, useNavigate } from 'react-router-dom';
 import AdminSidebar from './AdminSidebar';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
+    const navigate = useNavigate();
     const role = localStorage.getItem('role');
 
     if (role !== 'admin') {
@@ -18,7 +19,7 @@ const AdminLayout = () => {
                     <div className="header-left">
                         <h2>Admin Dashboard</h2>
                     </div>
-                    <div className="header-right">
+                    <div className="header-right" onClick={() => navigate('/admin/profile')} style={{ cursor: 'pointer' }}>
                         <span className="welcome-text">Welcome, <strong>Admin</strong></span>
                         <div className="admin-profile-circle">
                             <span className="admin-icon">👤</span>
