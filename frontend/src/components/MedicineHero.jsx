@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './MedicineHero.css';
 // import medicinesImg from '../assets/med_herosec.png';
-const medicinesImg = "https://via.placeholder.com/600x400?text=Medicine+Hero";
+import medicinesImg from '../assets/medicinehero.jpeg';
 
 const MedicineHero = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");

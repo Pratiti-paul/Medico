@@ -2,6 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "../context/CartContext";
+import Accounticon from "../assets/Account icon.png";
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -56,7 +57,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen((v) => !v)}
             >
               <img 
-                src="https://via.placeholder.com/40" 
+                src={Accounticon} 
                 alt="Account" 
                 className="account-icon"
               />

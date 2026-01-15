@@ -3,10 +3,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Hero.css';
 
-const heroImg = "https://via.placeholder.com/600x600?text=Hero+Doctors";
-const doc1 = "https://via.placeholder.com/50?text=D1";
-const doc2 = "https://via.placeholder.com/50?text=D2";
-const doc3 = "https://via.placeholder.com/50?text=D3";
+import heroImg from '../assets/Homehero.jpeg';
+import doc1 from '../assets/Doc1.png';
+import doc2 from '../assets/Doc2.png';
+import doc3 from '../assets/Doc3.png';
+
 
 const Hero = () => {
   const navigate = useNavigate();

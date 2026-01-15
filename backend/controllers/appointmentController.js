@@ -56,3 +56,26 @@ exports.getMyAppointments = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// CANCEL appointment
+exports.cancelAppointment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const appointment = await Appointment.findById(id);
+
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not found" });
+    }
+
+    // Check if the user is the patient
+    if (appointment.patient.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Not authorized to cancel this appointment" });
+    }
+
+    await Appointment.findByIdAndDelete(id);
+
+    res.json({ message: "Appointment cancelled successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
