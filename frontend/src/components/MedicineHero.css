@@ -24,7 +24,6 @@
     color: #1a1a1a;
     /* Dark text */
     margin-bottom: 1rem;
-    font-family: var(--font-sans, sans-serif);
 }
 
 .medicine-hero-text {

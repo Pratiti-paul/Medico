@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import verified from "../assets/verified.png";
+import Loader from "../components/Loader/Loader";
 import "./DoctorProfile.css";
 
 const DoctorProfile = () => {
@@ -129,7 +130,7 @@ const DoctorProfile = () => {
         return bookedSlots.some(slot => slot.date === slotDate && slot.time === time);
     };
 
-    if (loading) return <div className="loading-text">Loading...</div>;
+    if (loading) return <Loader fullPage />;
     if (!doctor) return <div className="loading-text">Doctor not found</div>;
 
     const verifiedIconObj = verified;

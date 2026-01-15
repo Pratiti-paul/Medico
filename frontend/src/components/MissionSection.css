@@ -2,7 +2,6 @@
 .mission-section {
     padding: 80px 20px;
     background-color: white;
-    font-family: Georgia, serif;
 }
 
 .mission-content {
@@ -31,4 +30,3 @@
 .mission-section:hover {
     transform: translateY(-5px);
 }
-

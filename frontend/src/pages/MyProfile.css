@@ -1,10 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-
 .profile-dashboard {
     padding: 2.5rem;
     max-width: 1200px;
     margin: 0 auto;
-    font-family: 'Outfit', sans-serif;
     color: #1e293b;
     background-color: #f8fafc;
     min-height: 100vh;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Loader from "../components/Loader/Loader";
 import "./Appointments.css";
 
 import generalIcon from "../assets/Physician Medical Assistance.png";
@@ -55,7 +56,7 @@ const Appointments = () => {
   };
 
   if (loading) {
-    return <p className="loading-text">Loading...</p>;
+    return <Loader fullPage />;
   }
 
   return (

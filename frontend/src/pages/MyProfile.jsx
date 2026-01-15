@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
+import Loader from "../components/Loader/Loader";
 import "./MyProfile.css";
 
 const MyProfile = () => {
@@ -94,7 +95,7 @@ const MyProfile = () => {
     }
   };
 
-  if (!user) return <div className="loading-text">Loading...</div>;
+  if (!user) return <Loader fullPage />;
 
   const createdDate = new Date(user.createdAt).toLocaleDateString("en-US", {
     month: "long",
@@ -208,9 +209,7 @@ const MyProfile = () => {
             </div>
             
             {loadingApps ? (
-              <div className="loader-container">
-                <p className="loading-text-small">Fetching your appointments...</p>
-              </div>
+              <Loader />
             ) : appointments.length > 0 ? (
               <div className="appointments-grid">
                 {appointments.map((app) => (
