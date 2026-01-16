@@ -43,7 +43,7 @@ export default function Medicines() {
            category
         }).toString();
 
-        const res = await API.get(`/medicines?${queryParams}`);
+        const res = await API.get(`${import.meta.env.VITE_API_URL}/api/medicines?${queryParams}`);
         
         // Handle new response structure { medicines, totalPages, currentPage, totalMedicines }
         const data = res.data;
