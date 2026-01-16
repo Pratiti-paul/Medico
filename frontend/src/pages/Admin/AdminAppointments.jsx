@@ -11,7 +11,7 @@ const AdminAppointments = () => {
     const fetchAppointments = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5001/api/admin/appointments', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/appointments`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setAppointments(res.data);
@@ -30,7 +30,7 @@ const AdminAppointments = () => {
     const updateStatus = async (id, newStatus) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5001/api/admin/appointments/${id}/status`, 
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/admin/appointments/${id}/status`, 
                 { status: newStatus },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

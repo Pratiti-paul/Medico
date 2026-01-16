@@ -20,10 +20,10 @@ const AdminDashboard = () => {
             try {
                 const token = localStorage.getItem('token');
                 const [statsRes, activityRes] = await Promise.all([
-                    axios.get('http://localhost:5001/api/admin/stats', {
+                    axios.get(`${import.meta.env.VITE_API_URL}/api/admin/stats`, {
                         headers: { Authorization: `Bearer ${token}` }
                     }),
-                    axios.get('http://localhost:5001/api/admin/recent-activity', {
+                    axios.get(`${import.meta.env.VITE_API_URL}/api/admin/recent-activity`, {
                         headers: { Authorization: `Bearer ${token}` }
                     })
                 ]);

@@ -12,7 +12,7 @@ const AdminDoctors = () => {
     const fetchDoctors = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5001/api/admin/doctors', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/doctors`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setDoctors(res.data);
@@ -31,7 +31,7 @@ const AdminDoctors = () => {
     const toggleAvailability = async (id, currentStatus) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5001/api/admin/doctors/${id}/availability`, 
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/admin/doctors/${id}/availability`, 
                 { available: !currentStatus },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

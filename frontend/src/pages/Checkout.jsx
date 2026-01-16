@@ -20,7 +20,7 @@ const Checkout = () => {
                 quantity: item.quantity
             }));
 
-            const res = await axios.post('http://localhost:5001/api/orders', {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/orders`, {
                 medicines,
                 totalAmount: cartTotal,
                 paymentMethod

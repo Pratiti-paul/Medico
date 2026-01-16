@@ -11,7 +11,7 @@ const AdminOrders = () => {
     const fetchOrders = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5001/api/admin/orders', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/orders`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setOrders(res.data);
@@ -30,7 +30,7 @@ const AdminOrders = () => {
     const updateStatus = async (id, newStatus) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5001/api/admin/orders/${id}/status`, 
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/admin/orders/${id}/status`, 
                 { status: newStatus },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -44,7 +44,7 @@ const AdminOrders = () => {
     const updatePayment = async (id, newPaymentStatus) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5001/api/admin/orders/${id}/payment`, 
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/admin/orders/${id}/payment`, 
                 { paymentStatus: newPaymentStatus },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

@@ -22,8 +22,8 @@ const DoctorProfile = () => {
         const fetchDoctorAndSlots = async () => {
             try {
                 const [docRes, slotsRes] = await Promise.all([
-                    axios.get(`http://localhost:5001/api/doctors/${docId}`),
-                    axios.get(`http://localhost:5001/api/appointments/doctor/${docId}`)
+                    axios.get(`${import.meta.env.VITE_API_URL}/api/doctors/${docId}`),
+                    axios.get(`${import.meta.env.VITE_API_URL}/api/appointments/doctor/${docId}`)
                 ]);
                 
                 setDoctor(docRes.data);
@@ -97,8 +97,7 @@ const DoctorProfile = () => {
                 return;
             }
 
-            const res = await axios.post(
-                "http://localhost:5001/api/appointments",
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/appointments`,
                 {
                     doctorId: docId,
                     date: slotDate,
@@ -110,7 +109,7 @@ const DoctorProfile = () => {
             if (res.data.appointment) {
                 toast.success("Appointment booked successfully!");
                 // Refresh booked slots
-                const updatedSlots = await axios.get(`http://localhost:5001/api/appointments/doctor/${docId}`);
+                const updatedSlots = await axios.get(`${import.meta.env.VITE_API_URL}/api/appointments/doctor/${docId}`);
                 setBookedSlots(updatedSlots.data);
                 setSlotTime(''); // Reset selection
             }

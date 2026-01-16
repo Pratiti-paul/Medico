@@ -14,7 +14,7 @@ const AdminMedicines = () => {
 
     const fetchMedicines = async () => {
         try {
-            const res = await axios.get('http://localhost:5001/api/medicines?limit=100');
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/medicines?limit=100`);
             setMedicines(res.data.medicines);
         } catch (error) {
             console.error("Error fetching medicines:", error);
@@ -37,7 +37,7 @@ const AdminMedicines = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.put(`http://localhost:5001/api/admin/medicines/${editingMed._id}`, 
+            const res = await axios.put(`${import.meta.env.VITE_API_URL}/api/admin/medicines/${editingMed._id}`, 
                 editFormData,
                 { headers: { Authorization: `Bearer ${token}` } }
             );

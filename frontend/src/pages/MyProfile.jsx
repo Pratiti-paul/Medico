@@ -31,7 +31,7 @@ const MyProfile = () => {
         }
         
         // Fetch profile
-        const profileRes = await axios.get("http://localhost:5001/api/auth/profile", {
+        const profileRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setUser(profileRes.data);
@@ -43,7 +43,7 @@ const MyProfile = () => {
 
         // Fetch appointments (Only for Patients)
         if (profileRes.data.role !== 'admin') {
-          const appRes = await axios.get("http://localhost:5001/api/appointments/my", {
+          const appRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/appointments/my`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           setAppointments(appRes.data);
@@ -65,7 +65,7 @@ const MyProfile = () => {
   const handleUpdate = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.put("http://localhost:5001/api/auth/profile", formData, {
+      const res = await axios.put(`${import.meta.env.VITE_API_URL}/api/auth/profile`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUser(res.data.user);
@@ -88,7 +88,7 @@ const MyProfile = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5001/api/appointments/${appId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/appointments/${appId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       

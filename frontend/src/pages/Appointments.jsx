@@ -30,7 +30,7 @@ const Appointments = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/api/doctors?limit=100");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/doctors?limit=100`);
         setDoctors(res.data);
         setFilteredDoctors(res.data);
       } catch (error) {
