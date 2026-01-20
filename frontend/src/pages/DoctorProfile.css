@@ -253,3 +253,19 @@
         margin-left: 0;
     }
 }
+
+@media (max-width: 480px) {
+    .doctor-profile-container {
+        padding: 0 1rem;
+        margin: 20px auto;
+    }
+
+    .detail-info-box {
+        padding: 1.5rem;
+    }
+
+    .detail-name {
+        font-size: 24px;
+        flex-wrap: wrap;
+    }
+}

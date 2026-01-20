@@ -278,3 +278,40 @@
     background-color: #fef2f2;
     text-decoration: underline;
 }
+
+@media (max-width: 480px) {
+    .cart-page {
+        padding: 1rem;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .cart-item-details {
+        width: 100%;
+    }
+
+    .cart-items-header {
+        display: none;
+    }
+
+    .cart-item-price {
+        width: auto;
+        text-align: left;
+        margin-top: 0.5rem;
+    }
+
+    .cart-item-controls {
+        margin-top: 0.5rem;
+    }
+
+    .remove-btn {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        padding-left: 0;
+    }
+}

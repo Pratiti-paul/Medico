@@ -430,3 +430,24 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 480px) {
+    .profile-dashboard {
+        padding: 1rem;
+    }
+
+    .sidebar-card,
+    .appointments-card {
+        padding: 1.5rem;
+    }
+
+    .app-main-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Ensure card fits in view */
+    .modern-app-card {
+        padding: 1rem;
+    }
+}

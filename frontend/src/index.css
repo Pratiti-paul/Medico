@@ -35,16 +35,28 @@ html {
   }
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body,
 #root {
   height: 100%;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
+  /* Double protection */
   font-family: var(--font-sans);
   line-height: var(--line-height);
   color: var(--text);

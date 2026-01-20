@@ -114,3 +114,22 @@
     margin-bottom: 1rem;
     font-size: 0.9rem;
 }
+
+@media (max-width: 480px) {
+    .auth-content-wrapper {
+        padding: 1rem;
+    }
+
+    .auth-card {
+        padding: 1.5rem;
+        box-shadow: none;
+        /* Often cleaner on mobile */
+        border: 1px solid #e0e0e0;
+        /* Add border if shadow removed */
+    }
+
+    .auth-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}

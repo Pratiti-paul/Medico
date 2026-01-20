@@ -141,13 +141,94 @@
   color: #2563eb;
 }
 
+/* Hamburger Menu */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.bar {
+  height: 3px;
+  width: 100%;
+  background-color: #333;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.bar.open:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.bar.open:nth-child(2) {
+  opacity: 0;
+}
+
+.bar.open:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;
   }
 
+  .hamburger-menu {
+    display: flex;
+    order: 1;
+    /* Place hamburger after brand */
+  }
+
+  .navbar-brand {
+    order: 0;
+  }
+
+  .navbar-user {
+    order: 2;
+    /* Cart and Profile to the right */
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+
   .navbar-links {
-    display: none;
-    /* simple mobile hide for now unless mobile menu requested */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    display: flex;
+    /* Override display: flex from desktop to ensure it's flex */
+  }
+
+  .navbar-links.active {
+    max-height: 300px;
+    /* Adjust based on content */
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .navbar-links a {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .navbar-links a:last-child {
+    border-bottom: none;
   }
 }

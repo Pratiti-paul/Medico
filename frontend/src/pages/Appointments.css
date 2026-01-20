@@ -175,3 +175,18 @@
     font-size: 18px;
     color: #a0aec0;
 }
+
+@media (max-width: 768px) {
+    .doctors-page {
+        padding: 2rem 1rem;
+    }
+
+    .filter-heading {
+        font-size: 1.8rem;
+    }
+
+    .doctors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        justify-content: center;
+    }
+}

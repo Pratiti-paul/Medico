@@ -215,3 +215,17 @@
         grid-template-columns: 1fr 1fr;
     }
 }
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-info h3 {
+        font-size: 1.5rem;
+    }
+}

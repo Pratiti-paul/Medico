@@ -220,3 +220,28 @@
   color: #555;
   font-weight: 500;
 }
+
+@media (max-width: 480px) {
+  .medicines-container {
+    padding: 1rem;
+  }
+
+  .medicines-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .sort-select {
+    width: 100%;
+  }
+
+  .medicine-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .page-header {
+    margin-bottom: 1.5rem;
+  }
+}

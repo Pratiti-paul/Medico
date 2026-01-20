@@ -9,6 +9,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { cartCount } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const btnRef = useRef(null);
 
@@ -39,11 +40,22 @@ export default function Navbar() {
       <div className="navbar-brand">
         <h1>Medico</h1>
       </div>
-      <div className="navbar-links">
-        <Link to="/home">Home</Link>
-        <Link to="/medicines">Medicine</Link>
-        <Link to="/appointments">Consultation</Link>
-        <Link to="/about">About</Link>
+      
+      <button 
+        className="hamburger-menu"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        aria-label="Toggle navigation"
+      >
+        <span className={`bar ${mobileMenuOpen ? 'open' : ''}`}></span>
+        <span className={`bar ${mobileMenuOpen ? 'open' : ''}`}></span>
+        <span className={`bar ${mobileMenuOpen ? 'open' : ''}`}></span>
+      </button>
+
+      <div className={`navbar-links ${mobileMenuOpen ? 'active' : ''}`}>
+        <Link to="/home" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+        <Link to="/medicines" onClick={() => setMobileMenuOpen(false)}>Medicine</Link>
+        <Link to="/appointments" onClick={() => setMobileMenuOpen(false)}>Consultation</Link>
+        <Link to="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
       </div>
       <div className="navbar-user">
         <div className="navbar-actions">

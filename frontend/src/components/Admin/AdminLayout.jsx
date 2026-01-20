@@ -6,6 +6,7 @@ import './AdminLayout.css';
 const AdminLayout = () => {
     const navigate = useNavigate();
     const role = localStorage.getItem('role');
+    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
     if (role !== 'admin') {
         return <Navigate to="/home" replace />;
@@ -13,10 +14,20 @@ const AdminLayout = () => {
 
     return (
         <div className="admin-layout">
-            <AdminSidebar />
+            <div className={`admin-sidebar-wrapper ${isSidebarOpen ? 'open' : ''}`}>
+                 <AdminSidebar onClose={() => setIsSidebarOpen(false)} />
+            </div>
+            {isSidebarOpen && <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)}></div>}
+            
             <main className="admin-main-content">
                 <header className="admin-header">
                     <div className="header-left">
+                        <button 
+                            className="admin-hamburger"
+                            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                        >
+                            ☰
+                        </button>
                         <h2>Admin Dashboard</h2>
                     </div>
                     <div className="header-right" onClick={() => navigate('/admin/profile')} style={{ cursor: 'pointer' }}>

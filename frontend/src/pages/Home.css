@@ -79,3 +79,17 @@
         justify-content: center;
     }
 }
+
+@media (max-width: 480px) {
+    .home-container {
+        padding: 1rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+}
