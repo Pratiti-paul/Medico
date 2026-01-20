@@ -26,8 +26,7 @@ Medico is a full-stack healthcare management platform designed to streamline doc
 
 - React.js
 - React Router
-- Axios
-- Plain CSS (No UI frameworks)
+- Plain CSS 
 
 ### Backend
 
@@ -182,3 +181,4 @@ All payments are simulated, and no real medical or financial transactions occur.
 ---
 
 ## Made with ❤️ by Pratiti Paul 
+[GitHub](https://github.com/Pratiti-paul)
