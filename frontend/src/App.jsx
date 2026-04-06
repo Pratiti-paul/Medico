@@ -30,7 +30,7 @@ const chatWidgetConfig = {
     placement: 'bottom-right',
   },
   api: {
-    endpoint: '/api/chat',
+    endpoint: 'https://medico-6k19.onrender.com/api/chat',
   },
   initialMessage: 'Hi! How can I help you today?',
 };
