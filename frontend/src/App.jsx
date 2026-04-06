@@ -26,7 +26,7 @@ import { ChatWidget } from '@paramkhodiyar/chat-widget';
 const chatWidgetConfig = {
   theme: {
     primaryColor: '#2361a7',
-    botName: 'GrocerQuick Assistant',
+    botName: 'Medico Assistant',
     placement: 'bottom-right',
   },
   api: {
