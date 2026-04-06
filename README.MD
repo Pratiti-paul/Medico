@@ -173,6 +173,30 @@ Medico/
 
 ---
 
+## Chatbot Setup
+
+The project includes a website chatbot powered by `@paramkhodiyar/chat-widget` (frontend) and a streaming API route at `/api/chat` (backend).
+
+### Required backend environment variable
+
+- `GROQ_API_KEY=your_groq_api_key`
+
+Optional:
+
+- `GROQ_MODEL=llama-3.3-70b-versatile`
+- `GROQ_TEMPERATURE=0.4`
+- `GROQ_MAX_TOKENS=700`
+
+If `GROQ_API_KEY` is not set, the bot still opens and returns a fallback message so integration can be tested.
+
+### Local development
+
+- Start backend on port `5001`
+- Start frontend on port `5173`
+- Vite proxy forwards `/api/*` calls from frontend to backend
+
+---
+
 ## Disclaimer
 
 This project is intended for learning, development, and demonstration purposes only.
