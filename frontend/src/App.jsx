@@ -21,19 +21,6 @@ import Layout from "./components/Layout";
 import { CartProvider } from "./context/CartContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ChatWidget } from '@paramkhodiyar/chat-widget';
-
-const chatWidgetConfig = {
-  theme: {
-    primaryColor: '#2361a7',
-    botName: 'Medico Assistant',
-    placement: 'bottom-right',
-  },
-  api: {
-    endpoint: 'https://medico-6kf9.onrender.com/api/chat',
-  },
-  initialMessage: 'Hi! How can I help you today?',
-};
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -51,7 +38,6 @@ export default function App() {
     <BrowserRouter>
       <CartProvider>
         <ToastContainer position="top-right" autoClose={3000} />
-        <ChatWidget config={chatWidgetConfig} />
         <Routes>
           <Route path="/" element={<Signup />} />
           <Route path="/login" element={<Login />} />
