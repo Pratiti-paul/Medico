@@ -35,7 +35,7 @@ const Cart = () => {
           </div>
 
           {cartItems.map((item) => (
-            <div className="cart-item" key={item._id}>
+            <div className="cart-item" key={item._id} data-testid="cart-item">
               <div className="cart-item-details">
                 <div className="cart-item-image">
                   <img src={item.image} alt={item.name} />
@@ -50,13 +50,15 @@ const Cart = () => {
                 <button 
                   className="qty-btn"
                   onClick={() => updateQuantity(item._id, -1)}
+                  data-testid="decrease-qty-btn"
                 >
                   −
                 </button>
-                <span className="qty-val">{item.quantity}</span>
+                <span className="qty-val" data-testid="qty-val">{item.quantity}</span>
                 <button 
                   className="qty-btn"
                   onClick={() => updateQuantity(item._id, 1)}
+                  data-testid="increase-qty-btn"
                 >
                   +
                 </button>
@@ -66,6 +68,7 @@ const Cart = () => {
                     removeFromCart(item._id);
                     toast.info(`${item.name} removed from cart`);
                   }}
+                  data-testid="remove-item-btn"
                 >
                   Remove
                 </button>
@@ -105,6 +108,7 @@ const Cart = () => {
           <button 
             className="checkout-btn"
             onClick={() => navigate('/checkout')}
+            data-testid="checkout-btn"
           >
             Proceed to Checkout
           </button>

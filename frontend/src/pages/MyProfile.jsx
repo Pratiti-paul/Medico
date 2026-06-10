@@ -125,7 +125,7 @@ const MyProfile = () => {
         </div>
         <div className="header-actions">
           {!isEdit && (
-            <button className="edit-btn-top" onClick={() => setIsEdit(true)}>
+            <button className="edit-btn-top" onClick={() => setIsEdit(true)} data-testid="edit-profile-btn">
               Edit Profile
             </button>
           )}
@@ -152,6 +152,7 @@ const MyProfile = () => {
                     className="edit-input"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    data-testid="profile-name-input"
                   />
                 </div>
                 <div className="form-group">
@@ -161,6 +162,7 @@ const MyProfile = () => {
                     className="edit-input"
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    data-testid="profile-phone-input"
                   />
                 </div>
                 <div className="form-group">
@@ -170,17 +172,18 @@ const MyProfile = () => {
                     rows="3"
                     value={formData.address}
                     onChange={(e) => setFormData({...formData, address: e.target.value})}
+                    data-testid="profile-address-input"
                   ></textarea>
                 </div>
                 <div className="edit-form-actions">
-                  <button className="save-btn-sidebar" onClick={handleUpdate}>Save Changes</button>
+                  <button className="save-btn-sidebar" onClick={handleUpdate} data-testid="save-profile-btn">Save Changes</button>
                   <button className="cancel-btn-sidebar" onClick={() => setIsEdit(false)}>Cancel</button>
                 </div>
               </div>
             ) : (
               <div className="profile-view-sidebar">
-                <h2 className="display-name">{user.name}</h2>
-                <p className="display-email">{user.email}</p>
+                <h2 className="display-name" data-testid="profile-name">{user.name}</h2>
+                <p className="display-email" data-testid="profile-email">{user.email}</p>
                 
                 <div className="details-stack">
                   <div className="detail-item">
@@ -189,7 +192,7 @@ const MyProfile = () => {
                     </span>
                     <div className="detail-text">
                       <label>Phone</label>
-                      <p>{user.phone || "Not provided"}</p>
+                      <p data-testid="profile-phone">{user.phone || "Not provided"}</p>
                     </div>
                   </div>
                   <div className="detail-item">
@@ -198,7 +201,7 @@ const MyProfile = () => {
                     </span>
                     <div className="detail-text">
                       <label>Address</label>
-                      <p>{user.address || "No address saved"}</p>
+                      <p data-testid="profile-address">{user.address || "No address saved"}</p>
                     </div>
                   </div>
                   <div className="detail-item">

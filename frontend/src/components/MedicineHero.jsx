@@ -24,10 +24,12 @@ const MedicineHero = ({ onSearch }) => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && onSearch(searchTerm)}
+            data-testid="medicine-search-input"
           />
           <button 
             className="medicine-search-btn"
             onClick={() => onSearch(searchTerm)}
+            data-testid="medicine-search-btn"
           >
             🔍
           </button>

@@ -76,6 +76,7 @@ const Appointments = () => {
                 selectedSpeciality === item.name ? "active" : ""
               }`}
               onClick={() => handleFilter(item.name)}
+              data-testid={`spec-filter-${item.name.replace(/\s+/g, '-')}`}
             >
               <div className="speciality-circle">
                  <img src={item.icon} alt={item.name} className="speciality-icon" />
@@ -92,6 +93,7 @@ const Appointments = () => {
             className="doc-card" 
             key={doctor._id}
             onClick={() => navigate(`/appointments/${doctor._id}`)}
+            data-testid="doctor-card"
           >
             <div className="doc-image-container">
               <img

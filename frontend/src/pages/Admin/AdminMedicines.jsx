@@ -86,11 +86,11 @@ const AdminMedicines = () => {
                         <tbody>
                             {filteredMedicines.length > 0 ? (
                                 filteredMedicines.map(med => (
-                                    <tr key={med._id}>
+                                    <tr key={med._id} data-testid="admin-med-row">
                                         <td className="doc-info-cell">
                                             <div className="doc-avatar">💊</div>
                                             <div className="doc-meta">
-                                                <span className="doc-name">{med.name}</span>
+                                                <span className="doc-name" data-testid="med-name">{med.name}</span>
                                                 <span className="doc-id">#{med._id.slice(-6).toUpperCase()}</span>
                                             </div>
                                         </td>
@@ -103,6 +103,7 @@ const AdminMedicines = () => {
                                             <button 
                                                 className="action-btn approve"
                                                 onClick={() => handleEditClick(med)}
+                                                data-testid="edit-med-btn"
                                             >
                                                 Edit
                                             </button>
@@ -132,6 +133,7 @@ const AdminMedicines = () => {
                                     type="number" 
                                     value={editFormData.price}
                                     onChange={(e) => setEditFormData({...editFormData, price: e.target.value})}
+                                    data-testid="med-form-price"
                                     required
                                 />
                             </div>
@@ -141,12 +143,13 @@ const AdminMedicines = () => {
                                     type="number" 
                                     value={editFormData.stock}
                                     onChange={(e) => setEditFormData({...editFormData, stock: e.target.value})}
+                                    data-testid="med-form-stock"
                                     required
                                 />
                             </div>
                             <div className="modal-actions">
                                 <button type="button" className="cancel-btn" onClick={() => setEditingMed(null)}>Cancel</button>
-                                <button type="submit" className="save-btn">Update Inventory</button>
+                                <button type="submit" className="save-btn" data-testid="med-form-submit">Update Inventory</button>
                             </div>
                         </form>
                     </div>

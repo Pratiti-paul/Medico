@@ -182,6 +182,7 @@ const DoctorProfile = () => {
                                 key={index} 
                                 className={`day-slot ${slotIndex === index ? 'active' : ''}`}
                                 onClick={() => setSlotIndex(index)}
+                                data-testid="date-tab"
                             >
                                 <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
                                 <p>{item[0] && item[0].datetime.getDate()}</p>
@@ -199,6 +200,7 @@ const DoctorProfile = () => {
                                     onClick={() => !booked && setSlotTime(item.time)}
                                     style={booked ? { backgroundColor: '#e0e0e0', color: '#a0a0a0', cursor: 'not-allowed', borderColor: '#d0d0d0' } : {}}
                                     title={booked ? "Slot already booked" : ""}
+                                    data-testid="time-slot"
                                 >
                                     {item.time.toLowerCase()}
                                 </p>
@@ -206,7 +208,7 @@ const DoctorProfile = () => {
                         })}
                     </div>
                     
-                    <button className="book-appointment-btn" onClick={bookAppointment}>
+                    <button className="book-appointment-btn" onClick={bookAppointment} data-testid="book-appointment-btn">
                         Book an appointment
                     </button>
                 </div>

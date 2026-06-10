@@ -36,6 +36,7 @@ const AdminSidebar = ({ onClose }) => {
                     to="/admin/dashboard" 
                     className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
                     onClick={handleNavClick}
+                    data-testid="admin-nav-dashboard"
                 >
                     <img src={DashboardIcon} alt="Dashboard" className="sidebar-asset-icon" />
                     Dashboard
@@ -44,6 +45,7 @@ const AdminSidebar = ({ onClose }) => {
                     to="/admin/doctors" 
                     className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
                     onClick={handleNavClick}
+                    data-testid="admin-nav-doctors"
                 >
                     <img src={DoctorIcon} alt="Doctors" className="sidebar-asset-icon" />
                     Doctors
@@ -52,6 +54,7 @@ const AdminSidebar = ({ onClose }) => {
                     to="/admin/medicines" 
                     className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
                     onClick={handleNavClick}
+                    data-testid="admin-nav-medicines"
                 >
                     <img src={MedicineIcon} alt="Medicines" className="sidebar-asset-icon" />
                     Medicines
@@ -60,6 +63,7 @@ const AdminSidebar = ({ onClose }) => {
                     to="/admin/appointments" 
                     className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
                     onClick={handleNavClick}
+                    data-testid="admin-nav-appointments"
                 >
                     <img src={AppointmentIcon} alt="Appointments" className="sidebar-asset-icon" />
                     Appointments
@@ -68,6 +72,7 @@ const AdminSidebar = ({ onClose }) => {
                     to="/admin/orders" 
                     className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
                     onClick={handleNavClick}
+                    data-testid="admin-nav-orders"
                 >
                     <img src={OrderIcon} alt="Orders" className="sidebar-asset-icon" />
                     Orders
@@ -75,7 +80,7 @@ const AdminSidebar = ({ onClose }) => {
             </nav>
 
             <div className="admin-sidebar-footer">
-                <button onClick={handleLogout} className="admin-logout-btn">
+                <button onClick={handleLogout} className="admin-logout-btn" data-testid="admin-nav-logout">
                     <span className="nav-icon">⏻</span>
                     Logout
                 </button>

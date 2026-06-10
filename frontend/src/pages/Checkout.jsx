@@ -57,6 +57,7 @@ const Checkout = () => {
                         <div 
                             className={`payment-card ${paymentMethod === 'UPI' ? 'active' : ''}`}
                             onClick={() => setPaymentMethod('UPI')}
+                            data-testid="payment-method-upi"
                         >
                             <span className="icon">📱</span>
                             <div className="info">
@@ -69,6 +70,7 @@ const Checkout = () => {
                         <div 
                             className={`payment-card ${paymentMethod === 'Card' ? 'active' : ''}`}
                             onClick={() => setPaymentMethod('Card')}
+                            data-testid="payment-method-card"
                         >
                             <span className="icon">💳</span>
                             <div className="info">
@@ -81,6 +83,7 @@ const Checkout = () => {
                         <div 
                             className={`payment-card ${paymentMethod === 'COD' ? 'active' : ''}`}
                             onClick={() => setPaymentMethod('COD')}
+                            data-testid="payment-method-cod"
                         >
                             <span className="icon">💵</span>
                             <div className="info">
@@ -114,6 +117,7 @@ const Checkout = () => {
                         className="pay-now-btn" 
                         onClick={handlePayment}
                         disabled={loading}
+                        data-testid="pay-now-btn"
                     >
                         {loading ? "Processing..." : paymentMethod === 'COD' ? "Place Order" : "Pay Now"}
                     </button>

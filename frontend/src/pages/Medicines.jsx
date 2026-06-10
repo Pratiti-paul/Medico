@@ -117,6 +117,7 @@ export default function Medicines() {
                   key={cat.value} 
                   className={`filter-btn ${category === cat.value ? 'active' : ''}`}
                   onClick={() => handleCategoryChange(cat.value)}
+                  data-testid={`medicine-category-btn-${cat.value.replace(/\s+/g, '-')}`}
                 >
                   {cat.label}
                 </button>
@@ -139,7 +140,7 @@ export default function Medicines() {
 
         <div className="medicine-grid">
           {medicines.map((med) => (
-            <div className="medicine-card" key={med._id}>
+            <div className="medicine-card" key={med._id} data-testid="medicine-card">
               <div className="medicine-image-wrapper">
                 <img
                   className="medicine-image"
@@ -163,13 +164,15 @@ export default function Medicines() {
                             <button 
                               className="qty-btn-mini" 
                               onClick={() => updateQuantity(med._id, -1)}
+                              data-testid="decrease-qty-btn"
                             >
                               −
                             </button>
-                            <span className="qty-val-mini">{qty}</span>
+                            <span className="qty-val-mini" data-testid="qty-val">{qty}</span>
                             <button 
                               className="qty-btn-mini" 
                               onClick={() => updateQuantity(med._id, 1)}
+                              data-testid="increase-qty-btn"
                             >
                               +
                             </button>
@@ -184,6 +187,7 @@ export default function Medicines() {
                              addToCart(med);
                              toast.success(`${med.name} added to cart!`);
                            }}
+                           data-testid="add-to-cart-btn"
                          >
                            Add to Cart
                          </button>
@@ -202,6 +206,7 @@ export default function Medicines() {
               className="pagination-btn" 
               disabled={page === 1}
               onClick={() => handlePageChange(page - 1)}
+              data-testid="prev-page-btn"
             >
               Previous
             </button>
@@ -210,6 +215,7 @@ export default function Medicines() {
               className="pagination-btn" 
               disabled={page === totalPages}
               onClick={() => handlePageChange(page + 1)}
+              data-testid="next-page-btn"
             >
               Next
             </button>

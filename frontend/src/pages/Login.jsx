@@ -68,6 +68,7 @@ const Login = () => {
               placeholder="Gmail"
               value={formData.email}
               onChange={handleChange}
+              data-testid="login-email"
               required
             />
             <input
@@ -77,6 +78,7 @@ const Login = () => {
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
+              data-testid="login-password"
               required
             />
             <div className="role-selection">
@@ -84,6 +86,7 @@ const Login = () => {
                 type="button" 
                 className={`role-btn ${formData.role === 'user' ? 'active' : ''}`}
                 onClick={() => setFormData({...formData, role: 'user'})}
+                data-testid="login-role-user"
               >
                 Patient
               </button>
@@ -91,12 +94,13 @@ const Login = () => {
                 type="button" 
                 className={`role-btn ${formData.role === 'admin' ? 'active' : ''}`}
                 onClick={() => setFormData({...formData, role: 'admin'})}
+                data-testid="login-role-admin"
               >
                 Admin
               </button>
             </div>
 
-            <button className="auth-button" type="submit">Login</button>
+            <button className="auth-button" type="submit" data-testid="login-submit">Login</button>
           </form>
           <div className="auth-text-link">
             Don't have an account? 

@@ -41,6 +41,7 @@ const Feedback = () => {
           placeholder="Your Name"
           value={form.name}
           onChange={handleChange}
+          data-testid="feedback-name"
           required
         />
 
@@ -50,6 +51,7 @@ const Feedback = () => {
           placeholder="Your Email"
           value={form.email}
           onChange={handleChange}
+          data-testid="feedback-email"
           required
         />
 
@@ -59,13 +61,14 @@ const Feedback = () => {
           rows="4"
           value={form.message}
           onChange={handleChange}
+          data-testid="feedback-message"
           required
         />
 
-        <button type="submit">Submit Feedback</button>
+        <button type="submit" data-testid="feedback-submit">Submit Feedback</button>
       </form>
 
-      {status && <p className="feedback-status">{status}</p>}
+      {status && <p className="feedback-status" data-testid="feedback-status">{status}</p>}
     </section>
   );
 };

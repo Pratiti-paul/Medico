@@ -36,9 +36,9 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" data-testid="navbar">
       <div className="navbar-brand">
-        <h1>Medico</h1>
+        <h1 data-testid="nav-logo">Medico</h1>
       </div>
       
       <button 
@@ -52,14 +52,14 @@ export default function Navbar() {
       </button>
 
       <div className={`navbar-links ${mobileMenuOpen ? 'active' : ''}`}>
-        <Link to="/home" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-        <Link to="/medicines" onClick={() => setMobileMenuOpen(false)}>Medicine</Link>
-        <Link to="/appointments" onClick={() => setMobileMenuOpen(false)}>Consultation</Link>
-        <Link to="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
+        <Link to="/home" onClick={() => setMobileMenuOpen(false)} data-testid="nav-home">Home</Link>
+        <Link to="/medicines" onClick={() => setMobileMenuOpen(false)} data-testid="nav-medicines">Medicine</Link>
+        <Link to="/appointments" onClick={() => setMobileMenuOpen(false)} data-testid="nav-appointments">Consultation</Link>
+        <Link to="/about" onClick={() => setMobileMenuOpen(false)} data-testid="nav-about">About</Link>
       </div>
       <div className="navbar-user">
         <div className="navbar-actions">
-          <Link to="/cart" className="cart-btn" aria-label="Cart">
+          <Link to="/cart" className="cart-btn" aria-label="Cart" data-testid="nav-cart">
              🛒 {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </Link>
           <div className="account-wrap">
@@ -67,6 +67,7 @@ export default function Navbar() {
               className="account-trigger"
               ref={btnRef}
               onClick={() => setMenuOpen((v) => !v)}
+              data-testid="account-trigger"
             >
               <img 
                 src={Accounticon} 
@@ -76,9 +77,9 @@ export default function Navbar() {
             </div>
             {menuOpen && (
               <div ref={menuRef} className="account-menu" role="menu">
-                <button className="menu-item" onClick={() => navigate('/profile')}>Profile</button>
-                <button className="menu-item" onClick={() => navigate('/my-orders')}>Order History</button>
-                <button className="menu-item" onClick={handleLogout}>Logout</button>
+                <button className="menu-item" onClick={() => navigate('/profile')} data-testid="nav-profile">Profile</button>
+                <button className="menu-item" onClick={() => navigate('/my-orders')} data-testid="nav-orders">Order History</button>
+                <button className="menu-item" onClick={handleLogout} data-testid="nav-logout">Logout</button>
               </div>
             )}
           </div>

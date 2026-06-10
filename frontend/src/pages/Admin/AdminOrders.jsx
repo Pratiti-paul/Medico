@@ -79,7 +79,7 @@ const AdminOrders = () => {
                         <tbody>
                             {orders.length > 0 ? (
                                 orders.map(order => (
-                                    <tr key={order._id}>
+                                    <tr key={order._id} data-testid="admin-order-row">
                                         <td className="order-id">#{order.orderId || order._id.slice(-6).toUpperCase()}</td>
                                         <td>
                                             <div className="entity-info">
@@ -104,6 +104,7 @@ const AdminOrders = () => {
                                                     <button 
                                                         className="action-btn approve"
                                                         onClick={() => updatePayment(order._id, 'paid')}
+                                                        data-testid="mark-paid-btn"
                                                     >
                                                         Mark Paid
                                                     </button>
@@ -112,6 +113,7 @@ const AdminOrders = () => {
                                                     <button 
                                                         className="action-btn approve"
                                                         onClick={() => updateStatus(order._id, 'delivered')}
+                                                        data-testid="deliver-order-btn"
                                                     >
                                                         Deliver
                                                     </button>

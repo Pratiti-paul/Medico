@@ -80,11 +80,11 @@ const AdminDoctors = () => {
                         <tbody>
                             {filteredDoctors.length > 0 ? (
                                 filteredDoctors.map(doc => (
-                                    <tr key={doc._id}>
+                                    <tr key={doc._id} data-testid="admin-doctor-row">
                                         <td className="doc-info-cell">
                                             <div className="doc-avatar">🩺</div>
                                             <div className="doc-meta">
-                                                <span className="doc-name">{doc.name}</span>
+                                                <span className="doc-name" data-testid="doctor-name">{doc.name}</span>
                                                 <span className="doc-id">#{doc._id.slice(-6).toUpperCase()}</span>
                                             </div>
                                         </td>
@@ -97,6 +97,7 @@ const AdminDoctors = () => {
                                                     type="checkbox" 
                                                     checked={doc.available}
                                                     onChange={() => toggleAvailability(doc._id, doc.available)}
+                                                    data-testid="doctor-availability-toggle"
                                                 />
                                                 <span className="slider round"></span>
                                             </label>

@@ -41,14 +41,14 @@ const MyOrders = () => {
             ) : (
                 <div className="orders-list">
                     {orders.map((order) => (
-                        <div key={order._id} className="order-card">
+                        <div key={order._id} className="order-card" data-testid="order-card">
                             <div className="order-header">
                                 <div className="id-group">
                                     <span className="label">ORDER ID</span>
-                                    <span className="value">{order.orderId || order._id.slice(-8).toUpperCase()}</span>
+                                    <span className="value" data-testid="order-id">{order.orderId || order._id.slice(-8).toUpperCase()}</span>
                                 </div>
                                 <div className="status-group">
-                                    <span className={`status-pill ${order.paymentStatus}`}>
+                                    <span className={`status-pill ${order.paymentStatus}`} data-testid="order-payment-status">
                                         {order.paymentStatus === 'paid' ? '● Paid' : '● Pending'}
                                     </span>
                                     <span className="date">
@@ -75,7 +75,7 @@ const MyOrders = () => {
 
                             <div className="order-footer">
                                 <div className="payment-info">
-                                    <span>Payment: <strong>{order.paymentMethod}</strong></span>
+                                    <span>Payment: <strong data-testid="order-payment-method">{order.paymentMethod}</strong></span>
                                 </div>
                                 <div className="total-info">
                                     <span>Total Paid:</span>

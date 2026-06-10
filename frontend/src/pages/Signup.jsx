@@ -60,6 +60,7 @@ const Signup = () => {
               placeholder="Username"
               value={formData.name}
               onChange={handleChange}
+              data-testid="signup-name"
               required
             />
             <input
@@ -69,6 +70,7 @@ const Signup = () => {
               placeholder="Gmail"
               value={formData.email}
               onChange={handleChange}
+              data-testid="signup-email"
               required
             />
             <input
@@ -78,6 +80,7 @@ const Signup = () => {
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
+              data-testid="signup-password"
               required
             />
             <div className="role-selection">
@@ -85,6 +88,7 @@ const Signup = () => {
                 type="button" 
                 className={`role-btn ${formData.role === 'user' ? 'active' : ''}`}
                 onClick={() => setFormData({...formData, role: 'user'})}
+                data-testid="signup-role-user"
               >
                 Patient
               </button>
@@ -92,12 +96,13 @@ const Signup = () => {
                 type="button" 
                 className={`role-btn ${formData.role === 'admin' ? 'active' : ''}`}
                 onClick={() => setFormData({...formData, role: 'admin'})}
+                data-testid="signup-role-admin"
               >
                 Admin
               </button>
             </div>
 
-            <button className="auth-button" type="submit">Sign Up</button>
+            <button className="auth-button" type="submit" data-testid="signup-submit">Sign Up</button>
           </form>
           <div className="auth-text-link">
             Already have an account? 
