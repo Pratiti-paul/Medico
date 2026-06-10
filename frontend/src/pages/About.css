@@ -2,3 +2,67 @@
     /* Main container can have some base styles if needed */
     font-family: Georgia, serif;
 }
+
+/* Make fonts of the whole about page a bit smaller */
+.about-page h1 {
+    font-size: 38px !important;
+}
+
+.about-page .about-header p {
+    font-size: 1.05rem !important;
+}
+
+.about-page h2 {
+    font-size: 24px !important;
+}
+
+.about-page .mission-section p,
+.about-page .vision-section p {
+    font-size: 1.05rem !important;
+}
+
+.about-page h3 {
+    font-size: 17px !important;
+}
+
+.about-page p {
+    font-size: 15px !important;
+}
+
+.about-page .offering-info p {
+    font-size: 13.5px !important;
+}
+
+.about-page .feedback-form input,
+.about-page .feedback-form textarea {
+    font-size: 14px !important;
+}
+
+.about-page .feedback-form button {
+    font-size: 15px !important;
+}
+
+/* Reduce spacing between sections */
+.about-page .about-header {
+    padding: 40px 20px 15px !important;
+}
+
+.about-page .mission-section {
+    padding: 15px 20px !important;
+}
+
+.about-page .vision-section {
+    padding: 15px 20px !important;
+}
+
+.about-page .offerings-section {
+    padding: 20px 20px !important;
+}
+
+.about-page .offerings-section h2 {
+    margin-bottom: 20px !important;
+}
+
+.about-page .feedback-section {
+    margin: 25px auto 60px !important;
+}
