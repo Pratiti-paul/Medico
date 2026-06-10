@@ -11,8 +11,8 @@ const About = () => {
     <div className="about-page">
       <AboutHeader />
       <MissionSection />
-      <OfferingsSection />
       <VisionSection />
+      <OfferingsSection />
       <Feedback />
     </div>
   );

@@ -143,9 +143,9 @@ export default function Medicines() {
               <div className="medicine-image-wrapper">
                 <img
                   className="medicine-image"
-                  src={med.image || "https://placehold.co/350x250?text=Medicine"}
+                  src={med.image || "https://img.freepik.com/free-vector/medicine-capsules-bottle-health-care-icon_24877-51343.jpg"}
                   alt={med.name}
-                  onError={(e) => { e.currentTarget.src = "https://placehold.co/350x250?text=Medicine"; }}
+                  onError={(e) => { e.currentTarget.src = "https://img.freepik.com/free-vector/medicine-capsules-bottle-health-care-icon_24877-51343.jpg"; }}
                 />
               </div>
               <div className="medicine-info">

@@ -60,7 +60,7 @@ export default function Navbar() {
       <div className="navbar-user">
         <div className="navbar-actions">
           <Link to="/cart" className="cart-btn" aria-label="Cart">
-             🛒 <span className="cart-badge">{cartCount > 0 ? cartCount : ''}</span>
+             🛒 {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </Link>
           <div className="account-wrap">
             <div 
