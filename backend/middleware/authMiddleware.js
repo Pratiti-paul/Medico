@@ -37,4 +37,11 @@ const admin = (req, res, next) => {
   }
 };
 
-module.exports = { protect, admin };
+const demoReadOnly = (req, res, next) => {
+  if (req.user && req.user.role === "demo") {
+    return res.status(403).json({ message: "Demo accounts are read-only" });
+  }
+  next();
+};
+
+module.exports = { protect, admin, demoReadOnly };

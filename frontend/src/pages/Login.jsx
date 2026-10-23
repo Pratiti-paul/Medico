@@ -12,6 +12,8 @@ const Login = () => {
     role: "user",
   });
   const [error, setError] = useState("");
+  const [isDemoLoading, setIsDemoLoading] = useState(false);
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,6 +22,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setIsLoginLoading(true);
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
@@ -49,8 +52,49 @@ const Login = () => {
         navigate("/home");
       }
     } catch (err) {
-      setError(err.message);
-      toast.error(err.message);
+      const message = err.message || "Login failed";
+      setError(message);
+      toast.error(message);
+    } finally {
+      setIsLoginLoading(false);
+    }
+  };
+
+  const handleDemoLogin = async () => {
+    setError("");
+    setIsDemoLoading(true);
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/demo-login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error("Demo service is unavailable");
+      }
+
+      if (!response.ok) {
+        throw new Error(data.message || "Demo login failed");
+      }
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("role", data.user.role);
+      toast.success("Welcome to the Medico demo!");
+      navigate(data.user.role === "admin" ? "/admin/dashboard" : "/home");
+    } catch (err) {
+      const message = err.message === "Failed to fetch"
+        ? "Demo service is unavailable"
+        : err.message || "Demo login failed";
+      setError(message);
+      toast.error(message);
+    } finally {
+      setIsDemoLoading(false);
     }
   };
 
@@ -100,8 +144,25 @@ const Login = () => {
               </button>
             </div>
 
-            <button className="auth-button" type="submit" data-testid="login-submit">Login</button>
+            <button
+              className="auth-button"
+              type="submit"
+              disabled={isLoginLoading || isDemoLoading}
+              data-testid="login-submit"
+            >
+              {isLoginLoading ? "Logging in..." : "Login"}
+            </button>
           </form>
+          <div className="demo-divider"><span>or</span></div>
+          <button
+            className="demo-button"
+            type="button"
+            onClick={handleDemoLogin}
+            disabled={isLoginLoading || isDemoLoading}
+            data-testid="try-demo"
+          >
+            {isDemoLoading ? "Starting demo..." : "Try Demo"}
+          </button>
           <div className="auth-text-link">
             Don't have an account? 
             <Link to="/">Sign Up</Link>

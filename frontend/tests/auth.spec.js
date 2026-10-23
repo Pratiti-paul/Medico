@@ -37,4 +37,11 @@ test.describe.serial('Authentication Tests', () => {
     await page.goto('/home');
     await expect(page).toHaveURL(/\/login/);
   });
+
+  test('A6. Demo login should authenticate and redirect to the home page', async ({ loginPage, page }) => {
+    await loginPage.goto();
+    await loginPage.tryDemo();
+    await expect(page).toHaveURL(/\/home/);
+    await expect(page.evaluate(() => localStorage.getItem('role'))).resolves.toBe('demo');
+  });
 });

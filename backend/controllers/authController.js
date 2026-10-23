@@ -2,6 +2,20 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const createAuthResponse = (user) => ({
+  token: jwt.sign(
+    { id: user._id, role: user.role },
+    process.env.JWT_SECRET,
+    { expiresIn: "7d" }
+  ),
+  user: {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role
+  }
+});
+
 // ================= REGISTER =================
 exports.registerUser = async (req, res) => {
   try {
@@ -52,22 +66,36 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    // generate token
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    res.json(createAuthResponse(user));
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-    res.json({
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role
-      }
-    });
+// ================= DEMO LOGIN =================
+exports.loginDemoUser = async (req, res) => {
+  try {
+    const demoEmail = (process.env.DEMO_EMAIL || "").trim().toLowerCase();
+    const demoPassword = process.env.DEMO_PASSWORD || "";
+
+    if (!demoEmail || !demoPassword || !process.env.JWT_SECRET) {
+      return res.status(503).json({ message: "Demo login is not configured" });
+    }
+
+    let user = await User.findOne({ email: demoEmail });
+
+    if (!user) {
+      user = await User.create({
+        name: process.env.DEMO_NAME || "Medico Demo Patient",
+        email: demoEmail,
+        password: await bcrypt.hash(demoPassword, 10),
+        role: "demo"
+      });
+    } else if (user.role !== "demo") {
+      return res.status(503).json({ message: "Demo login is not configured" });
+    }
+
+    res.json(createAuthResponse(user));
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -6,6 +6,7 @@ export class LoginPage {
     this.patientRoleBtn = page.getByTestId('login-role-user');
     this.adminRoleBtn = page.getByTestId('login-role-admin');
     this.submitBtn = page.getByTestId('login-submit');
+    this.tryDemoBtn = page.getByTestId('try-demo');
   }
 
   async goto() {
@@ -21,5 +22,9 @@ export class LoginPage {
       await this.patientRoleBtn.click();
     }
     await this.submitBtn.click();
+  }
+
+  async tryDemo() {
+    await this.tryDemoBtn.click();
   }
 }

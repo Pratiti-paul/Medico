@@ -5,14 +5,14 @@ const {
   getDoctorAppointments,
   cancelAppointment
 } = require("../controllers/appointmentController");
-const { protect } = require("../middleware/authMiddleware");
+const { protect, demoReadOnly } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
 // protected routes
-router.post("/", protect, bookAppointment);
+router.post("/", protect, demoReadOnly, bookAppointment);
 router.get("/my", protect, getMyAppointments);
-router.delete("/:id", protect, cancelAppointment);
+router.delete("/:id", protect, demoReadOnly, cancelAppointment);
 router.get("/doctor/:docId", getDoctorAppointments);
 
 module.exports = router;
