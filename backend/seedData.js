@@ -74,35 +74,35 @@ const medicines = [
     category: "FEVER & COLD",
     price: 25,
     stock: 80,
-    image: "https://placehold.co/300x200?text=Cetirizine",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuS3jO-CNT-znm-fBt2QrrHHVHY5eymD9t_At8Ezzp7g&s=10",
   },
   {
     name: "Vitamin C Tablets",
     category: "SUPPLEMENTS",
     price: 150,
     stock: 60,
-    image: "https://placehold.co/300x200?text=Vitamin+C",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBFlOdB_p9SMpeyrF9-ZizXSXoye7zyyStILBVXDqn4w&s=10",
   },
   {
     name: "Multivitamin Tablets",
     category: "SUPPLEMENTS",
     price: 220,
     stock: 50,
-    image: "https://placehold.co/300x200?text=Multivitamins",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGBeh0EdIJJ3GqPjw5hs3APRxc1fsFECOvmgBqyJlzWQ&s=10",
   },
   {
     name: "Antiseptic Cream",
     category: "OTHERS",
     price: 90,
     stock: 40,
-    image: "https://placehold.co/300x200?text=Antiseptic",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI72jbvP4PjBdCZakS2kJyCWeI7Vhqjgu78nqlCjBqNw&s=10",
   },
   {
     name: "Digital Thermometer",
     category: "OTHERS",
     price: 250,
     stock: 30,
-    image: "https://placehold.co/300x200?text=Thermometer",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJg3e-6N6MU9S5kI7Og53UVAiyyRt31rcNq6njdXje5Q&s=10",
   },
   {
     name: "Amoxicillin 500mg",
@@ -116,7 +116,7 @@ const medicines = [
     category: "ANTIBIOTICS",
     price: 100,
     stock: 35,
-    image: "https://placehold.co/300x200?text=Azithromycin",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5fZAwJMh9Jrslgp0AB0-jCSdiFjBakObNhdqdOfXPfw&s=10",
   },
 ];
 
@@ -153,7 +153,17 @@ async function seedData() {
       await Medicine.insertMany(medicines);
       console.log("Inserted sample medicines");
     } else {
-      console.log(`Medicines already exist: ${medicineCount}. Skipping.`);
+      const medicineImageUpdates = medicines.map(({ name, image }) => ({
+        updateOne: {
+          filter: { name },
+          update: { $set: { image } },
+        },
+      }));
+
+      const result = await Medicine.bulkWrite(medicineImageUpdates);
+      console.log(
+        `Medicines already exist: ${medicineCount}. Updated ${result.modifiedCount} medicine images.`
+      );
     }
   } catch (error) {
     console.error("Seeding failed:", error.message);
