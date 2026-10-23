@@ -136,7 +136,17 @@ async function seedData() {
       await Doctor.insertMany(doctors);
       console.log("Inserted sample doctors");
     } else {
-      console.log(`Doctors already exist: ${doctorCount}. Skipping.`);
+      const doctorImageUpdates = doctors.map(({ name, image }) => ({
+        updateOne: {
+          filter: { name },
+          update: { $set: { image } },
+        },
+      }));
+
+      const result = await Doctor.bulkWrite(doctorImageUpdates);
+      console.log(
+        `Doctors already exist: ${doctorCount}. Updated ${result.modifiedCount} doctor images.`
+      );
     }
 
     if (medicineCount === 0) {
