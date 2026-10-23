@@ -41,11 +41,13 @@ const TopDoctors = () => {
       <div className="td-grid">
         {doctors.map((doctor) => (
           <div className="td-card" key={doctor._id}>
-            <img
-              src={doctor.image}
-              alt={doctor.name}
-              className="td-image"
-            />
+            <div className="td-image-container">
+              <img
+                src={doctor.image}
+                alt={doctor.name}
+                className="td-image"
+              />
+            </div>
 
             <div className="td-info">
               <h3 className="td-name">{doctor.name}</h3>

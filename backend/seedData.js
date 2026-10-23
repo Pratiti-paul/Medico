@@ -67,7 +67,7 @@ const medicines = [
     category: "FEVER & COLD",
     price: 30,
     stock: 100,
-    image: "https://placehold.co/300x200?text=Paracetamol",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgleZYUEX0cRCKJqOFrW_GDFgk3H24WIgBDvwKYEk6zg&s=10",
   },
   {
     name: "Cetirizine 10mg",
@@ -109,7 +109,7 @@ const medicines = [
     category: "ANTIBIOTICS",
     price: 120,
     stock: 40,
-    image: "https://placehold.co/300x200?text=Amoxicillin",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7gDhuJ6jhdh5e-H1EdLYxmeDtec_lDRcHE6M1f0CunA&s=10",
   },
   {
     name: "Azithromycin 500mg",

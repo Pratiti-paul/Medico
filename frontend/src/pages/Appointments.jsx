@@ -10,6 +10,7 @@ import dermatologistIcon from "../assets/Dermatologist icon.png";
 import pediatricianIcon from "../assets/Pediatrician Icon.png";
 import neurologistIcon from "../assets/Neurologist Icon.png";
 import gastroIcon from "../assets/Gastroenterologists Icon.png";
+import allDoctorsIcon from "../assets/Doctors Stethoscope.png";
 
 const Appointments = () => {
   const [doctors, setDoctors] = useState([]);
@@ -19,6 +20,7 @@ const Appointments = () => {
   const navigate = useNavigate();
 
   const specialities = [
+    { name: "All", icon: allDoctorsIcon },
     { name: "General physician", icon: generalIcon },
     { name: "Gynecologist", icon: gynecologistIcon },
     { name: "Dermatologist", icon: dermatologistIcon },
@@ -44,6 +46,12 @@ const Appointments = () => {
   }, []);
 
   const handleFilter = (speciality) => {
+    if (speciality === "All") {
+      setSelectedSpeciality("All");
+      setFilteredDoctors(doctors);
+      return;
+    }
+
     if (selectedSpeciality === speciality) {
       setSelectedSpeciality("All");
       setFilteredDoctors(doctors);
